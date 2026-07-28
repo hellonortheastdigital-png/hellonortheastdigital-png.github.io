@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northeast Digital | Turning Ideas Into Digital Success</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#0B1120',
+                        brandBlue: '#2563EB',
+                        brandPurple: '#7C3AED',
+                        brandCyan: '#06B6D4',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B1120;
+            color: #FFFFFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.3);
+        }
+
+        .glass-nav {
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Neon Glow Text Gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #06B6D4 0%, #2563EB 50%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border-btn {
+            position: relative;
+            background: linear-gradient(#0B1120, #0B1120) padding-box,
+                        linear-gradient(135deg, #06B6D4, #7C3AED) border-box;
+            border: 2px solid transparent;
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #06B6D4, #2563EB, #7C3AED);
+            z-index: 100;
+            width: 0%;
+        }
+
+        /* Interactive Particle Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glowing Pulse FX */
+        .glow-orb {
+            position: absolute;
+            filter: blur(90px);
+            border-radius: 50%;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Interactive Background VFX Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Glowing Background Orbs -->
+    <div class="glow-orb w-96 h-96 bg-brandBlue top-10 left-10"></div>
+    <div class="glow-orb w-96 h-96 bg-brandPurple top-[40%] right-10"></div>
+    <div class="glow-orb w-80 h-80 bg-brandCyan bottom-20 left-[30%]"></div>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="text-2xl font-extrabold tracking-wider flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-brandCyan animate-ping"></span>
+                <span class="gradient-text">Northeast Digital</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#home" class="hover:text-brandCyan transition-colors">Home</a>
+                <a href="#about" class="hover:text-brandCyan transition-colors">About</a>
+                <a href="#services" class="hover:text-brandCyan transition-colors">Services</a>
+                <a href="#why-us" class="hover:text-brandCyan transition-colors">Why Us</a>
+                <a href="#portfolio" class="hover:text-brandCyan transition-colors">Portfolio</a>
+                <a href="#process" class="hover:text-brandCyan transition-colors">Process</a>
+                <a href="#contact" class="hover:text-brandCyan transition-colors">Contact</a>
+            </nav>
+
+            <a href="https://wa.me/916001614427" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full gradient-border-btn text-sm font-semibold hover:scale-105 transition-transform">
+                <span>Free Consultation</span>
+                <i data-lucide="arrow-up-right" class="w-4 h-4 text-brandCyan"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen pt-32 pb-20 flex items-center z-10 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs font-semibold tracking-wide text-brandCyan">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i> Premium Digital Agency
+                </div>
+                
+                <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+                    Grow Your Business with <br>
+                    <span class="gradient-text">Northeast Digital</span>
+                </h1>
+                
+                <p class="text-lg text-slate-300 leading-relaxed max-w-xl">
+                    We help businesses scale online through strategic Digital Marketing, Branding, Social Media Management, SEO, Website Development, Paid Advertising, and Creative Content.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="https://wa.me/916001614427" target="_blank" class="px-8 py-4 rounded-full bg-gradient-to-r from-brandBlue to-brandPurple text-white font-bold shadow-lg shadow-brandBlue/30 hover:scale-105 transition-transform flex items-center gap-3">
+                        <span>Get Free Consultation</span>
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#portfolio" class="px-8 py-4 rounded-full glass-card font-bold hover:bg-white/10 transition-colors flex items-center gap-2">
+                        <span>View Our Work</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-brandCyan"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating Motion Graphics UI Cards -->
+            <div class="relative flex justify-center items-center">
+                <div class="w-full max-w-md glass-card p-6 rounded-3xl relative z-10 shadow-2xl border border-white/10 space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-brandBlue/20 flex items-center justify-center text-brandCyan">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">Campaign Growth</h4>
+                                <p class="text-xs text-slate-400">Real-time Analytics</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-green-400 bg-green-500/10 px-2.5 py-1 rounded-full">+240% ROI</span>
+                    </div>
+
+                    <!-- Animated Graph Mockup -->
+                    <div class="h-32 flex items-end justify-between gap-2 pt-4">
+                        <div class="w-full bg-brandBlue/20 rounded-t h-[40%] hover:h-[60%] transition-all duration-500"></div>
+                        <div class="w-full bg-brandPurple/30 rounded-t h-[65%] hover:h-[80%] transition-all duration-500"></div>
+                        <div class="w-full bg-brandCyan/40 rounded-t h-[50%] hover:h-[70%] transition-all duration-500"></div>
+                        <div class="w-full bg-gradient-to-t from-brandBlue to-brandCyan rounded-t h-[90%] transition-all duration-500"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="glass-card p-3 rounded-xl text-center">
+                            <p class="text-xs text-slate-400">Direct Founder Focus</p>
+                            <p class="text-lg font-bold text-brandCyan">100% Dedicated</p>
+                        </div>
+                        <div class="glass-card p-3 rounded-xl text-center">
+                            <p class="text-xs text-slate-400">Execution Speed</p>
+                            <p class="text-lg font-bold text-brandPurple">Ultra Fast</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="glass-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
+                <div class="grid md:grid-cols-3 gap-8 items-center">
+                    <div class="space-y-4 md:col-span-1">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-brandBlue to-brandCyan p-1">
+                            <div class="w-full h-full bg-bgDark rounded-full flex items-center justify-center">
+                                <i data-lucide="user" class="w-12 h-12 text-brandCyan"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Shibam Ghosh</h3>
+                            <p class="text-brandCyan text-sm font-semibold">Founder & Chief Strategist</p>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-4">
+                        <h2 class="text-3xl font-bold tracking-tight">Turning Ideas Into Digital Success</h2>
+                        <p class="text-slate-300 leading-relaxed">
+                            Welcome to <strong>Northeast Digital</strong>. As a boutique digital marketing agency, we focus strictly on high-touch, customized digital strategies rather than mass-producing templates. 
+                        </p>
+                        <p class="text-slate-300 leading-relaxed">
+                            Our mission is simple: provide your business with direct founder-level attention, ultra-focused content design, and data-backed performance marketing that turns local and regional brands into market leaders.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (12 Animated Motion Cards) -->
+    <section id="services" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-4xl font-extrabold tracking-tight">Our Core <span class="gradient-text">Services</span></h2>
+                <p class="text-slate-400">Comprehensive digital growth solutions engineered for high impact and measurable results.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandBlue/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="share-2" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Social Media Marketing</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Build an active, engaged audience with strategic platform growth and trend-focused campaigns.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandPurple/20 flex items-center justify-center text-brandPurple group-hover:scale-110 transition-transform">
+                        <i data-lucide="target" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Meta Ads</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">High-converting target ads on Facebook and Instagram designed to lower CAC and maximize revenue.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandCyan/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Google Ads</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Capture immediate customer intent with laser-targeted Search, PPC, and Display ads.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandBlue/20 flex items-center justify-center text-brandBlue group-hover:scale-110 transition-transform">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">SEO Optimization</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Rank on Google search with technical SEO, keyword architecture, and organic backlink strategy.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandPurple/20 flex items-center justify-center text-brandPurple group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Website Design & Dev</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Fast, ultra-responsive, high-converting websites optimized for user experience and SEO.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandCyan/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Google Business Profile</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Dominate local map searches and attract walk-in customers through optimization.</p>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandBlue/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Graphic Design</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Eye-catching visual assets, social media graphics, and promotional banners that capture attention.</p>
+                </div>
+
+                <!-- Service 8 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandPurple/20 flex items-center justify-center text-brandPurple group-hover:scale-110 transition-transform">
+                        <i data-lucide="video" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Video Editing</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Engaging vertical reels, motion graphics, and cinematic promotional edits tailored for engagement.</p>
+                </div>
+
+                <!-- Service 9 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandCyan/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Branding</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Complete visual identity system, custom brand books, typography, and cohesive guidelines.</p>
+                </div>
+
+                <!-- Service 10 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandBlue/20 flex items-center justify-center text-brandBlue group-hover:scale-110 transition-transform">
+                        <i data-lucide="edit-3" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Content Creation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Compelling storytelling, copywriting, and multimedia creative assets built to resonate.</p>
+                </div>
+
+                <!-- Service 11 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandPurple/20 flex items-center justify-center text-brandPurple group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Lead Generation</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Targeted funnels engineered to capture qualified leads directly for your sales pipeline.</p>
+                </div>
+
+                <!-- Service 12 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 group">
+                    <div class="w-12 h-12 rounded-xl bg-brandCyan/20 flex items-center justify-center text-brandCyan group-hover:scale-110 transition-transform">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Local Business Marketing</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Hyper-targeted campaigns designed to build strong regional visibility and customer loyalty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us (Authentic Boutique Value Pillars) -->
+    <section id="why-us" class="py-24 relative z-10 px-6 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-4xl font-extrabold tracking-tight">Why Partner With <span class="gradient-text">Northeast Digital</span></h2>
+                <p class="text-slate-400">Authentic dedication, direct strategy, and personalized attention for every project.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-2xl text-center space-y-3">
+                    <div class="text-4xl font-extrabold text-brandCyan">100%</div>
+                    <h4 class="font-bold">Founder Focus</h4>
+                    <p class="text-xs text-slate-400">Direct collaboration with founder Shibam Ghosh without agency middlemen.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl text-center space-y-3">
+                    <div class="text-4xl font-extrabold text-brandBlue">Custom</div>
+                    <h4 class="font-bold">Tailored Strategy</h4>
+                    <p class="text-xs text-slate-400">Zero cookie-cutter templates. Every campaign is built specifically for your niche.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl text-center space-y-3">
+                    <div class="text-4xl font-extrabold text-brandPurple">High-ROI</div>
+                    <h4 class="font-bold">Result Oriented</h4>
+                    <p class="text-xs text-slate-400">We prioritize actionable conversions, sales inquiries, and measurable growth.</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl text-center space-y-3">
+                    <div class="text-4xl font-extrabold text-green-400">24/7</div>
+                    <h4 class="font-bold">Direct Communication</h4>
+                    <p class="text-xs text-slate-400">Quick turnarounds, weekly performance reports, and constant support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-4xl font-extrabold tracking-tight">Featured <span class="gradient-text">Work & Prototypes</span></h2>
+                <p class="text-slate-400">A glimpse into our current marketing executions and high-converting campaign designs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Portfolio Card 1 -->
+                <div class="glass-card rounded-3xl overflow-hidden group">
+                    <div class="h-64 bg-gradient-to-br from-brandBlue/30 to-brandPurple/30 flex items-center justify-center relative p-6">
+                        <div class="text-center space-y-2">
+                            <span class="px-3 py-1 rounded-full bg-brandCyan/20 text-brandCyan text-xs font-bold">Social Media & Ad Campaign</span>
+                            <h3 class="text-2xl font-bold">Local Retail Growth Engine</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <p class="text-slate-300 text-sm">Targeted Meta Ads strategy and dynamic video content generated high lead conversion for an active regional client.</p>
+                        <div class="flex items-center gap-2 text-brandCyan text-sm font-semibold">
+                            <span>Strategy Breakdown</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Card 2 -->
+                <div class="glass-card rounded-3xl overflow-hidden group">
+                    <div class="h-64 bg-gradient-to-br from-brandPurple/30 to-brandCyan/30 flex items-center justify-center relative p-6">
+                        <div class="text-center space-y-2">
+                            <span class="px-3 py-1 rounded-full bg-brandPurple/20 text-brandPurple text-xs font-bold">Web Design & Branding</span>
+                            <h3 class="text-2xl font-bold">Modern Digital Experience</h3>
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-4">
+                        <p class="text-slate-300 text-sm">Full digital makeover including sleek UX development, Google Map optimization, and high-converting landing pages.</p>
+                        <div class="flex items-center gap-2 text-brandCyan text-sm font-semibold">
+                            <span>View Case Blueprint</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Process Timeline -->
+    <section id="process" class="py-24 relative z-10 px-6 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-4xl font-extrabold tracking-tight">Our Simple <span class="gradient-text">Process</span></h2>
+                <p class="text-slate-400">A smooth 5-step roadmap engineered to launch, optimize, and scale your brand online.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-brandCyan/20 text-brandCyan flex items-center justify-center font-bold">01</div>
+                    <h4 class="font-bold">Discovery</h4>
+                    <p class="text-xs text-slate-400">Understanding your brand goals and audience.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-brandBlue/20 text-brandBlue flex items-center justify-center font-bold">02</div>
+                    <h4 class="font-bold">Strategy</h4>
+                    <p class="text-xs text-slate-400">Building a custom high-ROI execution blueprint.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-brandPurple/20 text-brandPurple flex items-center justify-center font-bold">03</div>
+                    <h4 class="font-bold">Design</h4>
+                    <p class="text-xs text-slate-400">Crafting motion visual assets & copy.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl space-y-3">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-brandCyan/20 text-brandCyan flex items-center justify-center font-bold">04</div>
+                    <h4 class="font-bold">Marketing</h4>
+                    <p class="text-xs text-slate-400">Deploying ad campaigns & SEO optimization.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl sm:col-span-1 col-span-2 space-y-3">
+                    <div class="w-10 h-10 mx-auto rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold">05</div>
+                    <h4 class="font-bold">Growth</h4>
+                    <p class="text-xs text-slate-400">Analyzing performance and scaling conversions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 relative z-10 px-6">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl font-extrabold tracking-tight">Client <span class="gradient-text">Feedback</span></h2>
+                <p class="text-slate-400">What our valued partners have to say about working with Shibam Ghosh.</p>
+            </div>
+
+            <div class="glass-card p-8 md:p-12 rounded-3xl text-center space-y-6 relative">
+                <div class="flex justify-center text-yellow-400 gap-1">
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                </div>
+                <p class="text-lg md:text-xl text-slate-200 italic leading-relaxed">
+                    "Northeast Digital took our online setup to a whole new level. The response times are immediate, and Shibam gives personal attention to every creative detail. Highly recommend!"
+                </p>
+                <div>
+                    <h4 class="font-bold">Partner Brand</h4>
+                    <p class="text-xs text-brandCyan">Active Marketing Client</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative z-10 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <h2 class="text-4xl font-extrabold tracking-tight">Let's Build Something <span class="gradient-text">Great Together</span></h2>
+                    <p class="text-slate-300">Ready to scale your business online? Reach out directly to founder Shibam Ghosh for a free consultation.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <a href="https://wa.me/916001614427" target="_blank" class="flex items-center gap-4 glass-card p-4 rounded-2xl hover:border-brandCyan transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/20 text-green-400 flex items-center justify-center">
+                            <i data-lucide="phone" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">WhatsApp / Call</p>
+                            <p class="font-bold text-lg">+91 6001614427</p>
+                        </div>
+                    </a>
+
+                    <a href="mailto:hellonortheastdigital@gmail.com" class="flex items-center gap-4 glass-card p-4 rounded-2xl hover:border-brandBlue transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-brandBlue/20 text-brandCyan flex items-center justify-center">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Email Us</p>
+                            <p class="font-bold text-lg">hellonortheastdigital@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="https://instagram.com/north_east_digital" target="_blank" class="flex items-center gap-4 glass-card p-4 rounded-2xl hover:border-brandPurple transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-brandPurple/20 text-brandPurple flex items-center justify-center">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Instagram Handle</p>
+                            <p class="font-bold text-lg">@north_east_digital</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-card p-8 rounded-3xl space-y-6">
+                <h3 class="text-2xl font-bold">Send A Direct Message</h3>
+                <form onsubmit="event.preventDefault(); alert('Thank you! Shibam will contact you shortly.');" class="space-y-4">
+                    <div>
+                        <label class="text-xs font-semibold text-slate-400 block mb-2">Your Name</label>
+                        <input type="text" required placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white focus:outline-none focus:border-brandCyan">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-400 block mb-2">Email Address</label>
+                        <input type="email" required placeholder="name@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white focus:outline-none focus:border-brandCyan">
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-400 block mb-2">Your Requirement</label>
+                        <textarea rows="4" required placeholder="Tell us about your business or project..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-white/10 text-white focus:outline-none focus:border-brandCyan"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brandBlue to-brandPurple font-bold hover:opacity-90 transition-opacity">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 relative z-10 border-t border-white/10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-slate-400 text-sm">
+            <div>
+                <span class="font-bold text-white">Northeast Digital</span> | Domain: <a href="http://www.northeastdigital.com" class="text-brandCyan">www.northeastdigital.com</a>
+            </div>
+            <div>
+                © 2026 Northeast Digital. All Rights Reserved.
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms & Conditions</a>
+                <a href="#contact" class="hover:text-white">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Persistent Floating Sticky Action Buttons (Bottom-Right) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="https://wa.me/916001614427" target="_blank" title="WhatsApp Us" class="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </a>
+        <a href="https://instagram.com/north_east_digital" target="_blank" title="Instagram" class="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <i data-lucide="instagram" class="w-6 h-6"></i>
+        </a>
+        <a href="mailto:hellonortheastdigital@gmail.com" title="Email Us" class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
+            <i data-lucide="mail" class="w-6 h-6"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Scroll Progress Bar Logic
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
+
+        // Canvas Particle Mesh VFX
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 0.6 - 0.3;
+                this.color = ['#06B6D4', '#2563EB', '#7C3AED'][Math.floor(Math.random() * 3)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw subtle connecting lines
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 110) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 - distance/1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
