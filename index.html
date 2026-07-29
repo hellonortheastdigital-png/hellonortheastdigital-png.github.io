@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northeast Digital | Your Growth, Our Digital Strategy</title>
+    <meta name="description" content="Northeast Digital is a premier digital marketing agency founded by Shibam Ghosh, specializing in growth strategy, web development, SEO, ads, and AI automation.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Northeast Digital | Premium Digital Marketing Agency">
+    <meta property="og:description" content="Your Growth, Our Digital Strategy. Scale your brand with cutting-edge digital marketing and tech solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://northeastdigital.agency">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#05050A',
+                        cardDark: '#0A0A12',
+                        electricBlue: '#00F0FF',
+                        neonPurple: '#9D00FF',
+                        neonCyan: '#00FFCC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05050A; }
+        ::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+        html { scroll-behavior: smooth; }
+        body { background-color: #05050A; color: #F3F4F6; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(10, 10, 18, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 240, 255, 0.15);
+        }
+
+        /* Glow & Gradients */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+        .glow-box {
+            box-shadow: 0 0 40px -10px rgba(157, 0, 255, 0.3);
+        }
+        .mesh-gradient {
+            background-image: radial-gradient(at 10% 20%, hsla(265,89%,30%,0.25) 0px, transparent 50%),
+                              radial-gradient(at 90% 80%, hsla(185,100%,30%,0.2) 0px, transparent 50%),
+                              radial-gradient(at 50% 50%, hsla(220,100%,20%,0.2) 0px, transparent 50%);
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 30px; height: 30px;
+            border: 2px solid rgba(0, 240, 255, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height: 0.2s, background-color 0.2s;
+            z-index: 9999;
+        }
+        .cursor-dot {
+            pointer-events: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 6px; height: 6px;
+            background-color: #00F0FF;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+
+        /* Canvas Background */
+        #neural-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .floating-delayed { animation: float 8s ease-in-out infinite 2s; }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
+
+        /* Modal Transitions */
+        .modal { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .hidden-modal { opacity: 0; pointer-events: none; transform: scale(0.95); }
+        .show-modal { opacity: 1; pointer-events: auto; transform: scale(1); }
+    </style>
+</head>
+<body class="selection:bg-electricBlue selection:text-black">
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor hidden md:block" id="cursor"></div>
+    <div class="cursor-dot hidden md:block" id="cursor-dot"></div>
+
+    <!-- Neural Network Background Canvas -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Aurora & Mesh Gradient Background Effects -->
+    <div class="fixed inset-0 mesh-gradient pointer-events-none z-[-2]"></div>
+
+    <!-- Loading Animation Screen -->
+    <div id="loader" class="fixed inset-0 bg-dark z-[10000] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative w-24 h-24 mb-6">
+            <div class="absolute inset-0 border-4 border-electricBlue/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-electricBlue border-t-transparent rounded-full animate-spin"></div>
+            <div class="absolute inset-4 bg-gradient-to-tr from-electricBlue to-neonPurple rounded-full blur-xl opacity-50 pulse-glow"></div>
+        </div>
+        <h2 class="text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-electricBlue to-neonPurple uppercase">Northeast Digital</h2>
+        <p class="text-xs text-gray-400 mt-2 tracking-widest uppercase">Initializing Neural Core...</p>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-8 md:right-auto md:max-w-md z-50 glass glass-card p-5 rounded-2xl shadow-2xl flex flex-col gap-3 transform translate-y-32 transition-transform duration-500">
+        <div class="flex items-start gap-3">
+            <i class="fa-solid fa-shield-halved text-electricBlue text-xl mt-1"></i>
+            <div>
+                <h4 class="font-bold text-sm text-white">Privacy & Experience</h4>
+                <p class="text-xs text-gray-400 mt-1">We use cookies to optimize your experience, analyze traffic, and power interactive features.</p>
+            </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 mt-1">
+            <button onclick="acceptCookies(false)" class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white transition">Decline</button>
+            <button onclick="acceptCookies(true)" class="px-5 py-2 text-xs font-semibold bg-gradient-to-r from-electricBlue to-neonPurple text-black rounded-xl hover:opacity-90 transition shadow-lg shadow-electricBlue/20">Accept All</button>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="https://wa.me/916001614427" target="_blank" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">WhatsApp</span>
+        </a>
+        <a href="https://instagram.com/north_east_digital" target="_blank" class="w-12 h-12 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-instagram text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">Instagram</span>
+        </a>
+        <button onclick="openChatbot()" class="w-12 h-12 bg-gradient-to-r from-electricBlue to-neonPurple text-black rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-solid fa-robot text-lg font-bold"></i>
+            <span class="absolute right-14 bg-dark text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">AI Assistant</span>
+        </button>
+        <button onclick="scrollToTop()" id="back-to-top" class="w-12 h-12 glass text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 opacity-0 pointer-events-none group relative">
+            <i class="fa-solid fa-arrow-up text-sm"></i>
+            <span class="absolute right-14 bg-dark text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">Back to Top</span>
+        </button>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center shadow-lg shadow-electricBlue/20 group-hover:scale-105 transition">
+                    <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                        <span class="text-electricBlue font-black text-lg">NE</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider text-white">NORTHEAST</span>
+                    <span class="text-xs block tracking-widest text-electricBlue font-semibold">DIGITAL</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-electricBlue transition">Home</a>
+                <a href="#about" class="hover:text-electricBlue transition">About</a>
+                <a href="#founder" class="hover:text-electricBlue transition">Founder</a>
+                <a href="#services" class="hover:text-electricBlue transition">Services</a>
+                <a href="#portfolio" class="hover:text-electricBlue transition">Portfolio</a>
+                <a href="#pricing" class="hover:text-electricBlue transition">Pricing</a>
+                <a href="#blog" class="hover:text-electricBlue transition">Blog</a>
+                <a href="#contact" class="hover:text-electricBlue transition">Contact</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center gap-4">
+                <button onclick="openLoginModal()" class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider glass hover:border-electricBlue text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-electricBlue"></i> Portal Login
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-electricBlue to-neonPurple text-black hover:opacity-90 transition shadow-lg shadow-electricBlue/20">
+                    Get Proposal
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-white focus:outline-none">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden glass border-b border-white/10 px-6 py-6 flex flex-col gap-4">
+            <a href="#home" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">About</a>
+            <a href="#founder" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Founder</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Services</a>
+            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Portfolio</a>
+            <a href="#pricing" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Pricing</a>
+            <a href="#blog" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Blog</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-electricBlue font-medium">Contact</a>
+            <div class="flex flex-col gap-3 pt-4 border-t border-white/10">
+                <button onclick="openLoginModal(); toggleMobileMenu();" class="w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider glass text-white flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-lock text-electricBlue"></i> Portal Login
+                </button>
+                <a href="#contact" onclick="toggleMobileMenu()" class="w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-electricBlue to-neonPurple text-black text-center">
+                    Get Proposal
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center relative overflow-hidden">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 flex flex-col items-start text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-electricBlue/30 text-electricBlue text-xs font-semibold mb-6 shadow-lg shadow-electricBlue/10">
+                        <span class="w-2 h-2 rounded-full bg-electricBlue animate-ping"></span>
+                        Next-Gen Digital Marketing & Growth Agency
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6">
+                        Your Growth, <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-electricBlue via-neonPurple to-neonCyan glow-text">Our Digital Strategy.</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 max-w-2xl mb-10 leading-relaxed">
+                        We architect exponential business growth through elite social media marketing, high-converting web applications, precision ad campaigns, and advanced AI automation.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold uppercase tracking-wider text-sm text-center shadow-xl shadow-electricBlue/25 hover:scale-105 transition duration-300">
+                            Start Scaling Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass text-white font-bold uppercase tracking-wider text-sm text-center hover:border-electricBlue transition duration-300">
+                            Explore Work
+                        </a>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="grid grid-cols-3 gap-6 mt-16 pt-10 border-t border-white/10 w-full">
+                        <div>
+                            <h3 class="text-3xl lg:text-4xl font-black text-electricBlue"><span class="counter" data-target="250">0</span>+</h3>
+                            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Projects Scaled</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl lg:text-4xl font-black text-neonPurple"><span class="counter" data-target="98">0</span>%</h3>
+                            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Client Retention</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl lg:text-4xl font-black text-neonCyan">$<span class="counter" data-target="15">0</span>M+</h3>
+                            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Revenue Generated</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic / Holographic Visual -->
+                <div class="lg:col-span-5 relative flex items-center justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-electricBlue/30 to-neonPurple/30 rounded-full filter blur-3xl pulse-glow"></div>
+                        <div class="absolute inset-0 border border-electricBlue/20 rounded-full animate-spin" style="animation-duration: 25s;"></div>
+                        <div class="absolute inset-6 border border-neonPurple/20 rounded-full animate-spin" style="animation-duration: 20s; animation-direction: reverse;"></div>
+                        
+                        <div class="glass-card w-64 h-64 sm:w-80 sm:h-80 rounded-3xl p-8 flex flex-col justify-between relative z-10 floating">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-electricBlue">AI_CORE_ACTIVE</span>
+                            </div>
+                            <div class="my-auto text-center">
+                                <i class="fa-solid fa-chart-line text-6xl text-transparent bg-clip-text bg-gradient-to-r from-electricBlue to-neonPurple mb-4"></i>
+                                <h4 class="text-xl font-bold text-white">Northeast Neural AI</h4>
+                                <p class="text-xs text-gray-400 mt-2">Optimizing campaigns in real-time...</p>
+                            </div>
+                            <div class="flex items-center justify-between text-xs font-mono text-gray-400 pt-4 border-t border-white/10">
+                                <span>ROI: +420%</span>
+                                <span class="text-green-400">SECURE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Who We Are</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Engineering Elite Digital Dominance</h3>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">Northeast Digital is built at the intersection of creative brilliance and data-driven engineering. We don't just chase trends; we set them.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-2xl bg-electricBlue/10 border border-electricBlue/30 flex items-center justify-center text-electricBlue text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Precision Strategy</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Every campaign is custom-engineered based on deep market analytics, competitor analysis, and audience psychology.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-2xl bg-neonPurple/10 border border-neonPurple/30 flex items-center justify-center text-neonPurple text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">AI & Automation</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Leveraging state-of-the-art AI tools and automation pipelines to maximize lead conversion and minimize customer acquisition cost.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-14 h-14 rounded-2xl bg-neonCyan/10 border border-neonCyan/30 flex items-center justify-center text-neonCyan text-2xl mb-6 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Uncompromising Quality</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Inspired by Apple and Stripe design aesthetics, our deliverables and brand experiences are nothing short of world-class.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOUNDER SECTION -->
+        <section id="founder" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto glass-card rounded-3xl p-8 sm:p-16 relative overflow-hidden border border-white/10">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-neonPurple/20 rounded-full filter blur-3xl pointer-events-none"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl overflow-hidden glass border-2 border-electricBlue/40 shadow-2xl group">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-electricBlue/40 to-neonPurple/40 mix-blend-overlay"></div>
+                            <div class="w-full h-full bg-gradient-to-tr from-gray-900 to-gray-800 flex items-center justify-center text-electricBlue text-7xl font-black">
+                                SG
+                            </div>
+                            <div class="absolute bottom-0 inset-x-0 p-4 bg-dark/80 backdrop-blur-md border-t border-white/10 text-center">
+                                <h4 class="font-bold text-white text-lg">Shibam Ghosh</h4>
+                                <p class="text-xs text-electricBlue font-mono uppercase tracking-widest">Founder & CEO</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 flex flex-col items-start">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-electricBlue text-xs font-semibold mb-4">
+                            <i class="fa-solid fa-crown text-xs"></i> Visionary Leadership
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-black mb-6">Meet Shibam Ghosh</h2>
+                        <p class="text-gray-300 text-base leading-relaxed mb-6">
+                            "In today's hyper-competitive digital ecosystem, standard marketing is no longer enough. Businesses need aggressive strategies, lightning-fast web architecture, and AI-driven precision to capture market share."
+                        </p>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                            As the founder of Northeast Digital, Shibam has spearheaded numerous digital transformations, helping brands scale past multi-million dollar milestones through innovative web design, high-ROI ad campaigns, and unwavering dedication to excellence.
+                        </p>
+                        <div class="flex items-center gap-6">
+                            <a href="https://instagram.com/north_east_digital" target="_blank" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-electricBrand hover:border-electricBlue transition">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </a>
+                            <a href="https://wa.me/916001614427" target="_blank" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-green-400 hover:border-green-400 transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </a>
+                            <a href="mailto:hellonortheastdigital@gmail.com" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-electricBlue hover:border-electricBlue transition">
+                                <i class="fa-solid fa-envelope text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Our Expertise</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Complete Digital Solutions</h3>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">From full-stack web engineering to aggressive social media scaling, explore our 15 core services designed to drive exponential revenue.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid">
+                    <!-- Services populated via JS or static HTML -->
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-share-nodes"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Social Media Marketing</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Dominate social feeds with viral content strategies and community engagement.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 flex items-center justify-center text-neonPurple text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-code"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Website Development</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Blazing-fast, Apple-inspired custom web applications built for conversion.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonCyan/10 flex items-center justify-center text-neonCyan text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">SEO Optimization</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Rank #1 on Google with advanced technical SEO and authority building.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue text-xl mb-4 group-hover:scale-110 transition"><i class="fa-brands fa-google"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Google Ads</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">High-intent PPC campaigns designed for maximum return on ad spend.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 flex items-center justify-center text-neonPurple text-xl mb-4 group-hover:scale-110 transition"><i class="fa-brands fa-meta"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Meta Ads</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Laser-targeted Facebook & Instagram ads that convert scrollers into buyers.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonCyan/10 flex items-center justify-center text-neonCyan text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-pen-nib"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Graphic Design</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Stunning visual assets that command attention and elevate brand prestige.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-video"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Video Editing</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Cinematic edits optimized for Reels, TikTok, and YouTube retention.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 flex items-center justify-center text-neonPurple text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Motion Graphics</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Captivating animations that bring your brand story to dynamic life.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonCyan/10 flex items-center justify-center text-neonCyan text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-shield-cat"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Branding & Strategy</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Comprehensive brand identity development that builds lasting authority.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-signature"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Logo Design</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Memorable, iconic logos crafted to represent your core business values.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 text-xl mb-4 group-hover:scale-110 transition"><i class="fa-brands fa-whatsapp"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">WhatsApp Marketing</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Direct broadcast and automated conversational sales funnels on WhatsApp.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 flex items-center justify-center text-neonPurple text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-brain"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">AI Automation</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Custom AI chatbots, lead qualifiers, and workflow automations.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonCyan/10 flex items-center justify-center text-neonCyan text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-pen-clip"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Content Creation</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Engaging copywriting and storytelling tailored for maximum conversion.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Instagram Growth</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Organic follower acquisition and engagement strategies that build loyalty.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl group hover:border-electricBlue transition">
+                        <div class="w-12 h-12 rounded-xl bg-neonPurple/10 flex items-center justify-center text-neonPurple text-xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-location-dot"></i></div>
+                        <h4 class="text-lg font-bold text-white mb-2">Google Business Profile</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Local SEO optimization to dominate Google Maps and local search results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Proven Track Record</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Featured Case Studies</h3>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">Explore how we've scaled businesses across various industries with elite digital strategies.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-blue-900 to-indigo-900 p-6 flex items-end relative overflow-hidden">
+                            <div class="absolute inset-0 bg-electricBlue/10 group-hover:scale-105 transition duration-500"></div>
+                            <span class="relative z-10 text-xs font-mono font-bold bg-dark/80 px-3 py-1 rounded-full text-electricBlue border border-white/10">E-Commerce Scale</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Nova Fashion Apparel</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">Scaled Meta & Google ad ROAS from 2.1x to 5.8x in 90 days with automated email flows.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-electricBlue font-semibold">
+                                <span>Revenue: +340%</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-purple-900 to-pink-900 p-6 flex items-end relative overflow-hidden">
+                            <div class="absolute inset-0 bg-neonPurple/10 group-hover:scale-105 transition duration-500"></div>
+                            <span class="relative z-10 text-xs font-mono font-bold bg-dark/80 px-3 py-1 rounded-full text-neonPurple border border-white/10">SaaS Growth</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">CloudSync SaaS Platform</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">Complete UI/UX redesign, high-converting landing page, and technical SEO overhaul.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-neonPurple font-semibold">
+                                <span>Signups: +520%</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-cyan-900 to-blue-900 p-6 flex items-end relative overflow-hidden">
+                            <div class="absolute inset-0 bg-neonCyan/10 group-hover:scale-105 transition duration-500"></div>
+                            <span class="relative z-10 text-xs font-mono font-bold bg-dark/80 px-3 py-1 rounded-full text-neonCyan border border-white/10">Local Dominance</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Aura Luxury Hospitality</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">Google Business Profile optimization and targeted Instagram marketing for luxury resorts.</p>
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-neonCyan font-semibold">
+                                <span>Bookings: +280%</span>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section id="pricing" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Investment Plans</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Transparent, Results-Driven Pricing</h3>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">Choose the growth tier that fits your business goals. Custom enterprise packages also available.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Starter -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative">
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">Starter Growth</h4>
+                            <p class="text-gray-400 text-xs mb-6">Ideal for local businesses & startups wanting online traction.</p>
+                            <div class="text-4xl font-black text-white mb-6">$999<span class="text-xs text-gray-400 font-normal"> /month</span></div>
+                            <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Social Media Management (2 Platforms)</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Basic SEO Optimization</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Monthly Performance Report</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> WhatsApp Support</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="w-full py-3 rounded-xl glass font-bold text-xs uppercase tracking-wider text-center text-white hover:border-electricBlue transition">Get Started</a>
+                    </div>
+
+                    <!-- Pro Growth (Featured) -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative border-electricBlue/60 bg-gradient-to-b from-electricBlue/10 to-transparent shadow-xl shadow-electricBlue/10">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-electricBlue to-neonPurple text-black text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">Pro Accelerator</h4>
+                            <p class="text-gray-400 text-xs mb-6">Designed for brands ready to aggressively scale revenue.</p>
+                            <div class="text-4xl font-black text-electricBlue mb-6">$2,499<span class="text-xs text-gray-400 font-normal"> /month</span></div>
+                            <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Full Social Media Marketing & Ads</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Advanced Meta & Google Ads Mgmt</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Custom Web Development & SEO</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> AI Lead Automation Chatbot</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-electricBlue"></i> Dedicated Account Manager</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="w-full py-3 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold text-xs uppercase tracking-wider text-center hover:opacity-95 transition shadow-lg shadow-electricBlue/20">Get Started</a>
+                    </div>
+
+                    <!-- Enterprise -->
+                    <div class="glass-card p-8 rounded-3xl flex flex-col justify-between relative">
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-2">Enterprise Empire</h4>
+                            <p class="text-gray-400 text-xs mb-6">For established companies demanding total market dominance.</p>
+                            <div class="text-4xl font-black text-white mb-6">$4,999<span class="text-xs text-gray-400 font-normal"> /month</span></div>
+                            <ul class="space-y-4 text-sm text-gray-300 mb-8">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neonPurple"></i> Omnichannel Digital Strategy</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neonPurple"></i> Unlimited Graphic & Video Production</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neonPurple"></i> Advanced AI & CRM Automations</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neonPurple"></i> 24/7 Priority Support & Strategy Calls</li>
+                            </ul>
+                        </div>
+                        <a href="#contact" class="w-full py-3 rounded-xl glass font-bold text-xs uppercase tracking-wider text-center text-white hover:border-neonPurple transition">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="py-24 px-6 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Got Questions?</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Frequently Asked Questions</h3>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="glass-card rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between font-bold text-white text-base">
+                            <span>How soon can we expect results from our campaigns?</span>
+                            <i class="fa-solid fa-chevron-down text-electricBlue transition-transform duration-300"></i>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4 hidden leading-relaxed">Paid ad campaigns (Meta/Google) typically generate initial leads and sales within the first 14-30 days. Organic SEO and branding efforts compound over 3 to 6 months for massive long-term ROI.</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between font-bold text-white text-base">
+                            <span>Do you work with businesses outside of Northeast India?</span>
+                            <i class="fa-solid fa-chevron-down text-electricBlue transition-transform duration-300"></i>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4 hidden leading-relaxed">Yes! While rooted in our strong Northeast heritage, Northeast Digital partners with high-growth brands across the globe, including the USA, UK, UAE, and major metropolitan hubs across India.</p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 cursor-pointer" onclick="toggleFaq(this)">
+                        <div class="flex items-center justify-between font-bold text-white text-base">
+                            <span>How do I access client reports and invoices?</span>
+                            <i class="fa-solid fa-chevron-down text-electricBlue transition-transform duration-300"></i>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-4 hidden leading-relaxed">Every client gets instant access to our secure Client Portal where you can view live project timelines, download invoices, check payment status, and review analytics 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG PREVIEW SECTION -->
+        <section id="blog" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Latest Insights</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black tracking-tight">Digital Marketing & AI Blog</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-gray-900 to-blue-950 p-6 flex items-end">
+                            <span class="text-xs font-mono text-electricBlue bg-dark/80 px-3 py-1 rounded-full">AI Strategy</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-white mb-2 group-hover:text-electricBlue transition">How AI Automations Are Reshaping Lead Generation in 2026</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">Discover how conversational AI chatbots and automated CRM funnels convert cold traffic instantly.</p>
+                            <span class="text-xs font-semibold text-electricBlue">Read Article <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-gray-900 to-purple-950 p-6 flex items-end">
+                            <span class="text-xs font-mono text-neonPurple bg-dark/80 px-3 py-1 rounded-full">Performance Ads</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-white mb-2 group-hover:text-neonPurple transition">Mastering Meta Ads in the Age of Privacy Updates</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">Advanced creative strategies and Advantage+ campaign setups to bypass iOS tracking limitations.</p>
+                            <span class="text-xs font-semibold text-neonPurple">Read Article <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl overflow-hidden group">
+                        <div class="h-48 bg-gradient-to-tr from-gray-900 to-cyan-950 p-6 flex items-end">
+                            <span class="text-xs font-mono text-neonCyan bg-dark/80 px-3 py-1 rounded-full">Web Architecture</span>
+                        </div>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-white mb-2 group-hover:text-neonCyan transition">Why Your Landing Page Speed Is Killing Your Conversion Rate</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed mb-4">A 1-second delay in load time can drop conversions by 20%. Here is how to fix it.</p>
+                            <span class="text-xs font-semibold text-neonCyan">Read Article <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto glass-card rounded-3xl p-8 sm:p-16 border border-white/10 relative overflow-hidden">
+                <div class="absolute -left-20 -top-20 w-96 h-96 bg-electricBlue/10 rounded-full filter blur-3xl pointer-events-none"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10">
+                    <div class="lg:col-span-5 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Get in Touch</h2>
+                            <h3 class="text-3xl sm:text-4xl font-black mb-6">Let's Build Something Legendary</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-8">Ready to scale your business? Fill out the form or reach out directly via WhatsApp or email.</p>
+                        </div>
+                        <div class="space-y-4 text-sm text-gray-300">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-electricBlue"><i class="fa-solid fa-phone"></i></div>
+                                <span>+91 60016 14427</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-neonPurple"><i class="fa-solid fa-envelope"></i></div>
+                                <span>hellonortheastdigital@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl glass flex items-center justify-center text-neonCyan"><i class="fa-brands fa-instagram"></i></div>
+                                <span>@north_east_digital</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Your Name</label>
+                                    <input type="text" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="Shibam Ghosh">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Email Address</label>
+                                    <input type="email" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="shibam@example.com">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Phone Number</label>
+                                    <input type="tel" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="+91 60016 14427">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Service Needed</label>
+                                    <select class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition">
+                                        <option class="bg-dark">Social Media Marketing</option>
+                                        <option class="bg-dark">Website Development</option>
+                                        <option class="bg-dark">SEO & Google Ads</option>
+                                        <option class="bg-dark">AI Automation</option>
+                                        <option class="bg-dark">Full Enterprise Growth</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Project Details</label>
+                                <textarea rows="4" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="Tell us about your business goals..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-electricBlue/20">
+                                Send Proposal Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-dark py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center">
+                        <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                            <span class="text-electricBlue font-black text-lg">NE</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-lg font-black tracking-wider text-white">NORTHEAST</span>
+                        <span class="text-xs block tracking-widest text-electricBlue font-semibold">DIGITAL</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed">Your Growth, Our Digital Strategy. Empowering brands worldwide with cutting-edge marketing and AI engineering.</p>
+                <p class="text-xs text-gray-500">Founder: Shibam Ghosh</p>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><a href="#about" class="hover:text-electricBlue transition">About Us</a></li>
+                    <li><a href="#founder" class="hover:text-electricBlue transition">Founder</a></li>
+                    <li><a href="#services" class="hover:text-electricBlue transition">Services</a></li>
+                    <li><a href="#portfolio" class="hover:text-electricBlue transition">Portfolio</a></li>
+                    <li><a href="#pricing" class="hover:text-electricBlue transition">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Services</h4>
+                <ul class="space-y-2 text-xs text-gray-400">
+                    <li><a href="#services" class="hover:text-electricBlue transition">Social Media Marketing</a></li>
+                    <li><a href="#services" class="hover:text-electricBlue transition">Website Development</a></li>
+                    <li><a href="#services" class="hover:text-electricBlue transition">SEO & Google Ads</a></li>
+                    <li><a href="#services" class="hover:text-electricBlue transition">Meta Ads Management</a></li>
+                    <li><a href="#services" class="hover:text-electricBlue transition">AI Automation</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Connect</h4>
+                <div class="flex items-center gap-3 mb-4">
+                    <a href="https://wa.me/916001614427" target="_blank" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-green-400 hover:border-green-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/north_east_digital" target="_blank" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-pink-400 hover:border-pink-400 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="mailto:hellonortheastdigital@gmail.com" class="w-10 h-10 rounded-xl glass flex items-center justify-center text-white hover:text-electricBlue hover:border-electricBlue transition"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <p class="text-xs text-gray-400">Phone: +91 60016 14427</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+            <p>&copy; 2026 Northeast Digital. All rights reserved. Founded by Shibam Ghosh.</p>
+            <div class="flex gap-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:text-electricBlue transition">Privacy Policy</a>
+                <a href="#" class="hover:text-electricBlue transition">Terms of Service</a>
+                <a href="javascript:void(0)" onclick="openLoginModal()" class="hover:text-electricBlue transition">Portal Login</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- MODALS & PORTALS (ADMIN & CLIENT & CHATBOT)    -->
+    <!-- ============================================== -->
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-6 hidden-modal modal">
+        <div class="glass-card w-full max-w-md p-8 rounded-3xl relative border border-white/10">
+            <button onclick="closeLoginModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 mx-auto mb-4 flex items-center justify-center">
+                    <div class="w-full h-full bg-dark rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-lock text-electricBlue"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-black text-white">Portal Login</h3>
+                <p class="text-xs text-gray-400 mt-1">Admin or Client Demo Access</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Username / Email</label>
+                    <input type="text" id="login-user" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="northeastdigital or client email">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Password</label>
+                    <input type="password" id="login-pass" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none transition" placeholder="••••••••••••">
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-electricBlue/20">
+                    Authenticate
+                </button>
+                <div class="text-center mt-4">
+                    <p class="text-[11px] text-gray-500">Demo Admin: <code class="text-electricBlue">northeastdigital</code> / <code class="text-electricBlue">Northeast@6001</code></p>
+                    <p class="text-[11px] text-gray-500 mt-1">Or login with any client account created in Admin Dashboard.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD CONTAINER -->
+    <div id="admin-dashboard" class="fixed inset-0 z-[100] bg-dark hidden overflow-y-auto">
+        <div class="flex h-screen">
+            <!-- Sidebar -->
+            <aside class="w-64 glass border-r border-white/10 flex flex-col justify-between hidden md:flex">
+                <div class="p-6">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center">
+                            <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                                <span class="text-electricBlue font-black text-sm">NE</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="text-sm font-black tracking-wider text-white">ADMIN PORTAL</span>
+                            <span class="text-[10px] block text-electricBlue font-mono">SHIBAM GHOSH</span>
+                        </div>
+                    </div>
+                    <nav class="space-y-1 text-xs font-medium text-gray-400">
+                        <button onclick="switchAdminTab('dashboard')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition text-electricBlue bg-white/5"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
+                        <button onclick="switchAdminTab('clients')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-users"></i> Clients & CRM</button>
+                        <button onclick="switchAdminTab('projects')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-diagram-project"></i> Projects</button>
+                        <button onclick="switchAdminTab('invoices')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-file-invoice-dollar"></i> Invoices & GST</button>
+                        <button onclick="switchAdminTab('files')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-folder-open"></i> File Manager</button>
+                        <button onclick="switchAdminTab('analytics')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-chart-line"></i> Analytics</button>
+                        <button onclick="switchAdminTab('settings')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 hover:text-white transition"><i class="fa-solid fa-gear"></i> Settings</button>
+                    </nav>
+                </div>
+                <div class="p-6 border-t border-white/10">
+                    <button onclick="logoutAdmin()" class="w-full py-2.5 rounded-xl glass text-red-400 text-xs font-bold flex items-center justify-center gap-2 hover:bg-red-500/10 transition">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Dashboard Area -->
+            <div class="flex-1 flex flex-col h-screen overflow-hidden">
+                <!-- Topbar -->
+                <header class="h-20 glass border-b border-white/10 px-8 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-4">
+                        <button onclick="toggleMobileAdminSidebar()" class="md:hidden text-white text-xl"><i class="fa-solid fa-bars"></i></button>
+                        <h2 id="admin-page-title" class="text-lg font-bold text-white">Dashboard Overview</h2>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-electricBlue/20 border border-electricBlue/40 flex items-center justify-center text-electricBlue font-bold text-xs">SG</div>
+                            <span class="text-xs font-semibold text-white hidden sm:inline">Shibam Ghosh</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Dashboard Content Sections -->
+                <div class="flex-1 overflow-y-auto p-8 space-y-8" id="admin-content-area">
+                    <!-- Tab 1: Dashboard Overview -->
+                    <div id="admin-tab-dashboard" class="admin-tab space-y-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="glass-card p-6 rounded-2xl">
+                                <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Total Revenue</p>
+                                <h3 class="text-3xl font-black text-electricBlue">$48,250</h3>
+                                <span class="text-[11px] text-green-400 mt-2 block"><i class="fa-solid fa-arrow-up"></i> +18% this month</span>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl">
+                                <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Active Clients</p>
+                                <h3 id="stat-active-clients" class="text-3xl font-black text-neonPurple">14</h3>
+                                <span class="text-[11px] text-green-400 mt-2 block"><i class="fa-solid fa-arrow-up"></i> +3 new this week</span>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl">
+                                <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Pending Amount</p>
+                                <h3 id="stat-pending-amount" class="text-3xl font-black text-yellow-400">$3,400</h3>
+                                <span class="text-[11px] text-yellow-400 mt-2 block">Requires follow-up</span>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl">
+                                <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Active Projects</p>
+                                <h3 class="text-3xl font-black text-neonCyan">9</h3>
+                                <span class="text-[11px] text-electricBlue mt-2 block">On track</span>
+                            </div>
+                        </div>
+
+                        <!-- Charts Canvas Row -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div class="glass-card p-6 rounded-3xl">
+                                <h4 class="font-bold text-white text-sm mb-4">Monthly Revenue ($)</h4>
+                                <canvas id="revenueChart" height="200"></canvas>
+                            </div>
+                            <div class="glass-card p-6 rounded-3xl">
+                                <h4 class="font-bold text-white text-sm mb-4">Client Growth Trajectory</h4>
+                                <canvas id="clientGrowthChart" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Clients & CRM -->
+                    <div id="admin-tab-clients" class="admin-tab space-y-6 hidden">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="relative w-full sm:w-80">
+                                <input type="text" id="client-search" oninput="filterClients()" placeholder="Search clients..." class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-electricBlue focus:outline-none">
+                            </div>
+                            <button onclick="openAddClientModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold text-xs uppercase tracking-wider">
+                                <i class="fa-solid fa-plus mr-1"></i> Add Client Account
+                            </button>
+                        </div>
+
+                        <!-- Clients Table -->
+                        <div class="glass-card rounded-3xl overflow-hidden border border-white/10">
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="border-b border-white/10 text-gray-400 uppercase tracking-wider">
+                                            <th class="p-4">Client Name / Company</th>
+                                            <th class="p-4">Contact</th>
+                                            <th class="p-4">Project</th>
+                                            <th class="p-4">Pending ($)</th>
+                                            <th class="p-4">Status</th>
+                                            <th class="p-4 text-right">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="clients-table-body" class="divide-y divide-white/5 text-gray-300">
+                                        <!-- Populated via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Projects -->
+                    <div id="admin-tab-projects" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <h3 class="text-lg font-bold text-white mb-4">Active Agency Projects</h3>
+                            <div class="space-y-4" id="admin-projects-list">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Invoices & GST -->
+                    <div id="admin-tab-invoices" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-bold text-white">Invoice Generator & GST</h3>
+                                <button onclick="generateNewInvoice()" class="px-4 py-2 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase">Create Invoice</button>
+                            </div>
+                            <div class="space-y-4" id="invoices-list-container">
+                                <!-- Invoice items -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 5: File Manager -->
+                    <div id="admin-tab-files" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl border-2 border-dashed border-white/20 text-center relative hover:border-electricBlue transition">
+                            <input type="file" id="file-uploader" onchange="handleFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                            <i class="fa-solid fa-cloud-arrow-up text-4xl text-electricBlue mb-3"></i>
+                            <h4 class="font-bold text-white text-base">Drag & Drop Client Files Here</h4>
+                            <p class="text-xs text-gray-400 mt-1">Supports Images, PDFs, Videos, Excel, Word, ZIP (Demo via LocalStorage)</p>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="uploaded-files-grid">
+                            <!-- Files preview -->
+                        </div>
+                    </div>
+
+                    <!-- Tab 6: Analytics -->
+                    <div id="admin-tab-analytics" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl">
+                            <h3 class="text-lg font-bold text-white mb-6">Advanced Revenue & Performance Analytics</h3>
+                            <canvas id="detailedAnalyticsChart" height="120"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Tab 7: Settings -->
+                    <div id="admin-tab-settings" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl max-w-xl">
+                            <h3 class="text-lg font-bold text-white mb-6">Agency Settings</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Agency Name</label>
+                                    <input type="text" value="Northeast Digital" class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Founder Name</label>
+                                    <input type="text" value="Shibam Ghosh" class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Admin Username</label>
+                                    <input type="text" value="northeastdigital" class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs">
+                                </div>
+                                <button onclick="alert('Settings saved successfully!')" class="px-5 py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLIENT PORTAL CONTAINER -->
+    <div id="client-dashboard" class="fixed inset-0 z-[100] bg-dark hidden overflow-y-auto">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="flex items-center justify-between mb-12 border-b border-white/10 pb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center">
+                        <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                            <span class="text-electricBlue font-black text-sm">CP</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 id="client-portal-name" class="text-xl font-bold text-white">Client Portal</h2>
+                        <p class="text-xs text-electricBlue font-mono">Northeast Digital Client Hub</p>
+                    </div>
+                </div>
+                <button onclick="logoutClient()" class="px-5 py-2.5 rounded-xl glass text-red-400 text-xs font-bold flex items-center gap-2 hover:bg-red-500/10 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </button>
+            </div>
+
+            <!-- Client Dashboard Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Assigned Project</p>
+                    <h3 id="cp-project-name" class="text-xl font-bold text-white">Digital Growth Suite</h3>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Pending Amount</p>
+                    <h3 id="cp-pending-amount" class="text-xl font-bold text-yellow-400">$0.00</h3>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Payment Status</p>
+                    <h3 id="cp-status" class="text-xl font-bold text-green-400">Active & Paid</h3>
+                </div>
+            </div>
+
+            <!-- Client Files & Downloads -->
+            <div class="glass-card p-8 rounded-3xl mb-12">
+                <h3 class="text-lg font-bold text-white mb-6">Shared Files & Deliverables</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="client-files-grid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Announcements & Support -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-8 rounded-3xl">
+                    <h3 class="text-lg font-bold text-white mb-4">Agency Announcements</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">Welcome to the Northeast Digital Client Portal! All campaign reports, design deliverables, and invoices are updated in real-time by Shibam Ghosh and the team.</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <h3 class="text-lg font-bold text-white mb-4">Support & Contact</h3>
+                    <p class="text-xs text-gray-300 mb-4">Need immediate assistance? Reach out to your dedicated strategist.</p>
+                    <a href="https://wa.me/916001614427" target="_blank" class="px-5 py-2.5 rounded-xl bg-green-500 text-white font-bold text-xs inline-flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD CLIENT MODAL -->
+    <div id="add-client-modal" class="fixed inset-0 z-[120] bg-black/80 backdrop-blur-md flex items-center justify-center p-6 hidden-modal modal">
+        <div class="glass-card w-full max-w-lg p-8 rounded-3xl relative border border-white/10">
+            <button onclick="closeAddClientModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold text-white mb-6">Add New Client Account</h3>
+            <form onsubmit="handleSaveClient(event)" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Client Name</label>
+                        <input type="text" id="ac-name" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Company</label>
+                        <input type="text" id="ac-company" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Email (Login ID)</label>
+                        <input type="email" id="ac-email" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Password</label>
+                        <input type="password" id="ac-pass" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs" value="client123">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Project</label>
+                        <input type="text" id="ac-project" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Pending Amount ($)</label>
+                        <input type="number" id="ac-pending" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs" value="500">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase tracking-wider mt-4">Save Client Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI CHATBOT UI -->
+    <div id="chatbot-container" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 glass-card rounded-3xl shadow-2xl border border-white/10 hidden flex flex-col overflow-hidden transition-all duration-300">
+        <div class="p-4 bg-dark/80 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-electricBlue to-neonPurple flex items-center justify-center text-black font-bold text-xs">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs text-white">Northeast Digital Bot</h4>
+                    <span class="text-[10px] text-green-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span> Online</span>
+                </div>
+            </div>
+            <button onclick="closeChatbot()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="chatbot-messages" class="p-4 h-80 overflow-y-auto space-y-3 text-xs text-gray-300 flex flex-col">
+            <div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">
+                Hello! I am the Northeast Digital Bot. How can I help you scale your business today?
+            </div>
+        </div>
+        <div class="p-3 border-t border-white/10 bg-dark/80 flex items-center gap-2">
+            <input type="text" id="chatbot-input" onkeypress="if(event.key==='Enter') sendChatMessage()" placeholder="Ask about our services..." class="w-full bg-dark/60 border border-white/10 rounded-xl px-3 py-2 text-white text-xs focus:border-electricBlue focus:outline-none">
+            <button onclick="sendChatMessage()" class="w-9 h-9 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black flex items-center justify-center shrink-0"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+        </div>
+    </div>
+
+    <!-- Chart.js CDN for Animated Dashboards -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        /* ========================================== */
+        /* NEURAL NETWORK & PARTICLE CANVAS ANIMATION */
+        /* ========================================== */
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = Array.from({ length: 50 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            radius: Math.random() * 2 + 1
+        }));
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 240, 255, 0.15)';
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)';
+
+            particles.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* ========================================== */
+        /* CUSTOM CURSOR & LOADER                     */
+        /* ========================================== */
+        const cursor = document.getElementById('cursor');
+        const cursorDot = document.getElementById('cursor-dot');
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 700);
+            }, 800);
+            initLocalStorageData();
+        });
+
+        /* ========================================== */
+        /* COOKIE BANNER                              */
+        /* ========================================== */
+        setTimeout(() => {
+            if(!localStorage.getItem('cookiesAccepted')) {
+                document.getElementById('cookie-banner').classList.remove('translate-y-32');
+            }
+        }, 1500);
+
+        function acceptCookies(accepted) {
+            localStorage.setItem('cookiesAccepted', accepted);
+            document.getElementById('cookie-banner').classList.add('translate-y-32');
+        }
+
+        /* ========================================== */
+        /* MOBILE MENU & NAVBAR SCROLL                */
+        /* ========================================== */
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const btp = document.getElementById('back-to-top');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-xl');
+                btp.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                nav.classList.remove('shadow-xl');
+                btp.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ========================================== */
+        /* FAQ ACCORDION                              */
+        /* ========================================== */
+        function toggleFaq(el) {
+            const p = el.querySelector('p');
+            const icon = el.querySelector('i');
+            p.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        /* ========================================== */
+        /* ANIMATED COUNTERS                          */
+        /* ========================================== */
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight;
+            const targetPos = document.getElementById('home').offsetTop + 400;
+            if(scrollPos > targetPos && !animated) {
+                animated = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const speed = target / 50;
+                    const updateCount = () => {
+                        count += speed;
+                        if(count < target) {
+                            counter.innerText = Math.ceil(count);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+        });
+
+        /* ========================================== */
+        /* LOCALSTORAGE & AUTHENTICATION SYSTEM       */
+        /* ========================================== */
+        function initLocalStorageData() {
+            if(!localStorage.getItem('nd_clients')) {
+                const defaultClients = [
+                    { id: 1, name: 'Rahul Sharma', company: 'Nova Apparel', email: 'rahul@nova.com', pass: 'client123', project: 'E-Commerce Scale', pending: 0, status: 'Active' },
+                    { id: 2, name: 'Priya Das', company: 'CloudSync SaaS', email: 'priya@cloudsync.com', pass: 'client123', project: 'SaaS Growth & SEO', pending: 1200, status: 'Pending' },
+                    { id: 3, name: 'Vikram Bora', company: 'Aura Luxury', email: 'vikram@aura.com', pass: 'client123', project: 'Local SEO & Ads', pending: 2200, status: 'Active' }
+                ];
+                localStorage.setItem('nd_clients', JSON.stringify(defaultClients));
+            }
+            if(!localStorage.getItem('nd_files')) {
+                localStorage.setItem('nd_files', JSON.stringify([
+                    { name: 'Q2_Marketing_Strategy.pdf', type: 'pdf', size: '2.4 MB' },
+                    { name: 'Brand_Guidelines_2026.zip', type: 'zip', size: '14.1 MB' },
+                    { name: 'Ad_Creative_Banner.png', type: 'image', size: '1.8 MB' }
+                ]));
+            }
+        }
+
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden-modal');
+            document.getElementById('login-modal').classList.add('show-modal');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.remove('show-modal');
+            document.getElementById('login-modal').classList.add('hidden-modal');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('login-user').value.trim();
+            const p = document.getElementById('login-pass').value.trim();
+
+            if(u === 'northeastdigital' && p === 'Northeast@6001') {
+                closeLoginModal();
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                initAdminDashboard();
+                return;
+            }
+
+            // Check client login
+            const clients = JSON.parse(localStorage.getItem('nd_clients') || '[]');
+            const client = clients.find(c => c.email === u && c.pass === p);
+            if(client) {
+                closeLoginModal();
+                document.getElementById('client-dashboard').classList.remove('hidden');
+                initClientPortal(client);
+                return;
+            }
+
+            alert('Invalid credentials! Please check username/password.');
+        }
+
+        /* ========================================== */
+        /* ADMIN DASHBOARD LOGIC                      */
+        /* ========================================== */
+        function logoutAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.admin-nav-btn').forEach(b => {
+                b.classList.remove('text-electricBlue', 'bg-white/5');
+            });
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            event.currentTarget.classList.add('text-electricBlue', 'bg-white/5');
+            
+            if(tabName === 'dashboard') initCharts();
+            if(tabName === 'clients') renderClientsTable();
+            if(tabName === 'files') renderFilesManager();
+        }
+
+        function initAdminDashboard() {
+            initCharts();
+            renderClientsTable();
+            renderProjectsList();
+            renderInvoicesList();
+            renderFilesManager();
+        }
+
+        let revenueChartInstance = null;
+        let clientGrowthChartInstance = null;
+        let detailedAnalyticsInstance = null;
+
+        function initCharts() {
+            const ctx1 = document.getElementById('revenueChart').getContext('2d');
+            if(revenueChartInstance) revenueChartInstance.destroy();
+            revenueChartInstance = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue ($)',
+                        data: [12000, 19000, 28000, 35000, 42000, 48250],
+                        borderColor: '#00F0FF',
+                        backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+
+            const ctx2 = document.getElementById('clientGrowthChart').getContext('2d');
+            if(clientGrowthChartInstance) clientGrowthChartInstance.destroy();
+            clientGrowthChartInstance = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Clients',
+                        data: [5, 8, 10, 12, 14, 14],
+                        backgroundColor: '#9D00FF',
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+
+            const ctx3 = document.getElementById('detailedAnalyticsChart').getContext('2d');
+            if(detailedAnalyticsInstance) detailedAnalyticsInstance.destroy();
+            detailedAnalyticsInstance = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Ad Spend ROI (%)',
+                        data: [250, 310, 390, 420],
+                        borderColor: '#00FFCC',
+                        tension: 0.3
+                    }]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        function renderClientsTable() {
+            const clients = JSON.parse(localStorage.getItem('nd_clients') || '[]');
+            const tbody = document.getElementById('clients-table-body');
+            tbody.innerHTML = '';
+            clients.forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-white/5 transition">
+                        <td class="p-4 font-bold text-white">${c.name} <span class="block text-[10px] text-gray-400 font-normal">${c.company}</span></td>
+                        <td class="p-4">${c.email}</td>
+                        <td class="p-4">${c.project}</td>
+                        <td class="p-4 text-yellow-400">$${c.pending}</td>
+                        <td class="p-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${c.status === 'Active' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}">${c.status}</span></td>
+                        <td class="p-4 text-right">
+                            <button onclick="deleteClient(${c.id})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById('stat-active-clients').innerText = clients.length;
+            const totalPending = clients.reduce((sum, c) => sum + Number(c.pending), 0);
+            document.getElementById('stat-pending-amount').innerText = `$${totalPending}`;
+        }
+
+        function filterClients() {
+            const q = document.getElementById('client-search').value.toLowerCase();
+            const clients = JSON.parse(localStorage.getItem('nd_clients') || '[]');
+            const filtered = clients.filter(c => c.name.toLowerCase().includes(q) || c.company.toLowerCase().includes(q));
+            const tbody = document.getElementById('clients-table-body');
+            tbody.innerHTML = '';
+            filtered.forEach(c => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-white/5 transition">
+                        <td class="p-4 font-bold text-white">${c.name} <span class="block text-[10px] text-gray-400 font-normal">${c.company}</span></td>
+                        <td class="p-4">${c.email}</td>
+                        <td class="p-4">${c.project}</td>
+                        <td class="p-4 text-yellow-400">$${c.pending}</td>
+                        <td class="p-4"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${c.status === 'Active' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'}">${c.status}</span></td>
+                        <td class="p-4 text-right">
+                            <button onclick="deleteClient(${c.id})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openAddClientModal() {
+            document.getElementById('add-client-modal').classList.remove('hidden-modal');
+            document.getElementById('add-client-modal').classList.add('show-modal');
+        }
+        function closeAddClientModal() {
+            document.getElementById('add-client-modal').classList.remove('show-modal');
+            document.getElementById('add-client-modal').classList.add('hidden-modal');
+        }
+
+        function handleSaveClient(e) {
+            e.preventDefault();
+            const clients = JSON.parse(localStorage.getItem('nd_clients') || '[]');
+            const newClient = {
+                id: Date.now(),
+                name: document.getElementById('ac-name').value,
+                company: document.getElementById('ac-company').value,
+                email: document.getElementById('ac-email').value,
+                pass: document.getElementById('ac-pass').value,
+                project: document.getElementById('ac-project').value,
+                pending: Number(document.getElementById('ac-pending').value),
+                status: 'Active'
+            };
+            clients.push(newClient);
+            localStorage.setItem('nd_clients', JSON.stringify(clients));
+            closeAddClientModal();
+            renderClientsTable();
+            alert('Client account created successfully!');
+        }
+
+        function deleteClient(id) {
+            let clients = JSON.parse(localStorage.getItem('nd_clients') || '[]');
+            clients = clients.filter(c => c.id !== id);
+            localStorage.setItem('nd_clients', JSON.stringify(clients));
+            renderClientsTable();
+        }
+
+        function renderProjectsList() {
+            const list = document.getElementById('admin-projects-list');
+            list.innerHTML = `
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl">
+                    <div><h4 class="font-bold text-white text-sm">Nova Fashion E-Commerce</h4><p class="text-xs text-gray-400">Meta & Google Ads Optimization</p></div>
+                    <span class="px-3 py-1 rounded-full text-xs bg-green-500/10 text-green-400 font-bold">On Track</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl">
+                    <div><h4 class="font-bold text-white text-sm">CloudSync Web Overhaul</h4><p class="text-xs text-gray-400">Next.js Web App Development</p></div>
+                    <span class="px-3 py-1 rounded-full text-xs bg-electricBlue/10 text-electricBlue font-bold">In Progress</span>
+                </div>
+            `;
+        }
+
+        function renderInvoicesList() {
+            const container = document.getElementById('invoices-list-container');
+            container.innerHTML = `
+                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl">
+                    <div><h4 class="font-bold text-white text-sm">Invoice #ND-2026-001</h4><p class="text-xs text-gray-400">Client: Rahul Sharma | GST (18%): Included</p></div>
+                    <span class="text-electricBlue font-bold text-xs">$2,499.00 (Paid)</span>
+                </div>
+            `;
+        }
+
+        function generateNewInvoice() {
+            alert('New GST Invoice #ND-2026-002 generated successfully!');
+        }
+
+        function renderFilesManager() {
+            const files = JSON.parse(localStorage.getItem('nd_files') || '[]');
+            const grid = document.getElementById('uploaded-files-grid');
+            grid.innerHTML = '';
+            files.forEach(f => {
+                grid.innerHTML += `
+                    <div class="glass-card p-4 rounded-2xl flex flex-col items-center text-center">
+                        <i class="fa-solid fa-file-lines text-3xl text-electricBlue mb-2"></i>
+                        <h5 class="font-bold text-white text-xs truncate w-full">${f.name}</h5>
+                        <span class="text-[10px] text-gray-400 mt-1">${f.size}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function handleFileUpload(e) {
+            const file = e.target.files[0];
+            if(file) {
+                const files = JSON.parse(localStorage.getItem('nd_files') || '[]');
+                files.push({ name: file.name, type: 'file', size: (file.size / (1024*1024)).toFixed(1) + ' MB' });
+                localStorage.setItem('nd_files', JSON.stringify(files));
+                renderFilesManager();
+                alert('File uploaded successfully!');
+            }
+        }
+
+        /* ========================================== */
+        /* CLIENT PORTAL LOGIC                        */
+        /* ========================================== */
+        function logoutClient() {
+            document.getElementById('client-dashboard').classList.add('hidden');
+        }
+
+        function initClientPortal(client) {
+            document.getElementById('client-portal-name').innerText = `${client.name} (${client.company})`;
+            document.getElementById('cp-project-name').innerText = client.project;
+            document.getElementById('cp-pending-amount').innerText = `$${client.pending}`;
+            document.getElementById('cp-status').innerText = client.pending === 0 ? 'Fully Paid' : 'Pending Payment';
+
+            const files = JSON.parse(localStorage.getItem('nd_files') || '[]');
+            const grid = document.getElementById('client-files-grid');
+            grid.innerHTML = '';
+            files.forEach(f => {
+                grid.innerHTML += `
+                    <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-file-arrow-down text-electricBlue text-lg"></i>
+                            <div><h5 class="font-bold text-white text-xs">${f.name}</h5><span class="text-[10px] text-gray-400">${f.size}</span></div>
+                        </div>
+                        <button onclick="alert('Downloading ${f.name}...')" class="text-xs bg-electricBlue/10 text-electricBlue px-3 py-1 rounded-xl font-bold">Download</button>
+                    </div>
+                `;
+            });
+        }
+
+        /* ========================================== */
+        /* AI CHATBOT LOGIC                           */
+        /* ========================================== */
+        function openChatbot() {
+            document.getElementById('chatbot-container').classList.toggle('hidden');
+        }
+
+        function closeChatbot() {
+            document.getElementById('chatbot-container').classList.add('hidden');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            const messages = document.getElementById('chatbot-messages');
+            messages.innerHTML += `<div class="bg-gradient-to-r from-electricBlue to-neonPurple text-black p-3 rounded-2xl max-w-[85%] self-end font-medium">${msg}</div>`;
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = "Thank you for reaching out to Northeast Digital! Shibam Ghosh and our strategy team will get back to you shortly. You can also contact us directly via WhatsApp at +91 60016 14427.";
+                if(msg.toLowerCase().includes('price') || msg.toLowerCase().includes('cost')) {
+                    reply = "Our growth packages start at $999/month for Starter Growth, $2,499/month for Pro Accelerator, and $4,999/month for Enterprise Empire.";
+                } else if(msg.toLowerCase().includes('founder') || msg.toLowerCase().includes('shibam')) {
+                    reply = "Northeast Digital was founded by Shibam Ghosh, a visionary leader in digital marketing and web engineering.";
+                }
+                messages.innerHTML += `<div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">${reply}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        /* ========================================== */
+        /* CONTACT FORM SUBMISSION                    */
+        /* ========================================== */
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Proposal request sent successfully! Shibam Ghosh and the Northeast Digital team will contact you within 24 hours.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
