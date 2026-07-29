@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northeast Digital | Premier Digital Marketing Agency in Guwahati, Assam</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Northeast Digital is a premier digital marketing agency in Guwahati, Assam founded by Shibam Ghosh. Specializing in digital growth, web development, SEO, ads, and AI automation.">
+    <meta name="keywords" content="Northeast Digital, Digital Marketing Agency, Digital Marketing in Assam, Digital Marketing in Guwahati, Website Development, SEO Services, Social Media Marketing, Google Ads, Meta Ads, Instagram Marketing, AI Automation, Shibam Ghosh">
+    <link rel="canonical" href="https://northeastdigital.agency">
+    
+    <!-- Open Graph / Social Media Meta -->
+    <meta property="og:title" content="Northeast Digital | Digital Marketing Agency">
+    <meta property="og:description" content="Your Growth, Our Digital Strategy. Founded by Shibam Ghosh in Guwahati, Assam.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://northeastdigital.agency">
+
+    <!-- Schema.org LocalBusiness JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Northeast Digital",
+      "image": "https://northeastdigital.agency/logo.png",
+      "@id": "https://northeastdigital.agency",
+      "url": "https://northeastdigital.agency",
+      "telephone": "+916001614427",
+      "email": "hellonortheastdigital@gmail.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Shibam Ghosh"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Guwahati",
+        "addressRegion": "Assam",
+        "addressCountry": "IN"
+      },
+      "priceRange": "$$",
+      "sameAs": ["https://instagram.com/north_east_digital"]
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#05050A',
+                        cardDark: '#0A0A12',
+                        electricBlue: '#00F0FF',
+                        neonPurple: '#9D00FF',
+                        neonCyan: '#00FFCC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05050A; }
+        ::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+        body { background-color: #05050A; color: #F3F4F6; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        .glass {
+            background: rgba(10, 10, 18, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.35);
+            box-shadow: 0 12px 40px 0 rgba(0, 240, 255, 0.15);
+            transform: translateY(-3px);
+        }
+        .glow-text { text-shadow: 0 0 30px rgba(0, 240, 255, 0.6); }
+        .mesh-gradient {
+            background-image: radial-gradient(at 15% 20%, hsla(265,89%,30%,0.25) 0px, transparent 50%),
+                              radial-gradient(at 85% 80%, hsla(185,100%,30%,0.2) 0px, transparent 50%);
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .modal { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .hidden-modal { opacity: 0; pointer-events: none; transform: scale(0.95); display: none !important; }
+        .show-modal { opacity: 1; pointer-events: auto; transform: scale(1); display: flex !important; }
+
+        /* Custom Scroll Indicator */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00F0FF, #9D00FF);
+            z-index: 100;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+    </style>
+</head>
+<body class="selection:bg-electricBlue selection:text-black">
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Neural Background & Aurora Mesh -->
+    <canvas id="neural-canvas"></canvas>
+    <div class="fixed inset-0 mesh-gradient pointer-events-none z-[-2]"></div>
+
+    <!-- Premium Loading Animation Screen -->
+    <div id="loader" class="fixed inset-0 bg-dark z-[1000] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative w-20 h-20 mb-4 flex items-center justify-center">
+            <div class="absolute inset-0 border-4 border-electricBlue/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-electricBlue border-t-transparent rounded-full animate-spin"></div>
+            <span class="text-electricBlue font-bold text-sm">NE</span>
+        </div>
+        <h1 class="text-xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-electricBlue to-neonPurple uppercase">Northeast Digital</h1>
+        <p class="text-xs text-gray-400 mt-2 tracking-widest">Founder: Shibam Ghosh | Guwahati, Assam</p>
+    </div>
+
+    <!-- Floating Action Buttons (WhatsApp, Instagram, Email, AI Bot, Back to Top) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="https://wa.me/916001614427" target="_blank" aria-label="WhatsApp Chat" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">WhatsApp</span>
+        </a>
+        <a href="https://instagram.com/north_east_digital" target="_blank" aria-label="Instagram Profile" class="w-12 h-12 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-instagram text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">Instagram</span>
+        </a>
+        <a href="mailto:hellonortheastdigital@gmail.com" aria-label="Send Email" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-solid fa-envelope text-lg"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">Email</span>
+        </a>
+        <button onclick="openChatbot()" aria-label="AI Assistant" class="w-12 h-12 bg-gradient-to-r from-electricBlue to-neonPurple text-black rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-solid fa-robot text-lg font-bold"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">AI Assistant</span>
+        </button>
+        <button onclick="scrollToTop()" id="back-to-top" aria-label="Back to Top" class="w-12 h-12 glass text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 opacity-0 pointer-events-none group relative">
+            <i class="fa-solid fa-arrow-up text-sm"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10 pointer-events-none">Top</span>
+        </button>
+    </div>
+
+    <!-- Sticky Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center group-hover:scale-105 transition">
+                    <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                        <span class="text-electricBlue font-black text-lg">NE</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider text-white">NORTHEAST</span>
+                    <span class="text-xs block tracking-widest text-electricBlue font-semibold">DIGITAL</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-electricBlue transition">Home</a>
+                <a href="#about" class="hover:text-electricBlue transition">About</a>
+                <a href="#founder" class="hover:text-electricBlue transition">Founder</a>
+                <a href="#services" class="hover:text-electricBlue transition">Services</a>
+                <a href="#process" class="hover:text-electricBlue transition">Process</a>
+                <a href="#portfolio" class="hover:text-electricBlue transition">Portfolio</a>
+                <a href="#pricing" class="hover:text-electricBlue transition">Pricing</a>
+                <a href="#contact" class="hover:text-electricBlue transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="openLoginModal()" class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider glass hover:border-electricBlue text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-electricBlue"></i> Admin Portal
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 pb-20 px-6 max-w-7xl mx-auto space-y-32">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[85vh] flex flex-col justify-center items-center text-center relative">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-electricBlue/30 text-electricBlue text-xs font-semibold mb-6 shadow-xl shadow-electricBlue/10">
+                <span class="w-2 h-2 rounded-full bg-electricBlue animate-ping"></span>
+                Premier Digital Marketing Agency in Guwahati, Assam
+            </div>
+            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6">
+                Your Growth, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-electricBlue via-neonPurple to-neonCyan glow-text">Our Digital Strategy.</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-2xl mb-10 leading-relaxed">
+                Founded by Shibam Ghosh in Guwahati, Northeast Digital delivers elite marketing, website development, SEO, ads, and AI automation.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#contact" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold uppercase tracking-wider text-sm shadow-xl shadow-electricBlue/25 hover:scale-105 transition">
+                    Get Free Proposal <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <button onclick="openLoginModal()" class="px-8 py-4 rounded-2xl glass text-white font-bold uppercase tracking-wider text-sm hover:border-electricBlue transition">
+                    Admin Portal Login
+                </button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">About Northeast Digital</h3>
+                <h4 class="text-3xl sm:text-4xl font-black">Rooted in Assam, Scaling Globally</h4>
+                <p class="text-gray-400 mt-4 text-sm leading-relaxed">Northeast Digital bridges regional brands with global digital dominance through high-impact marketing and web engineering.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="w-12 h-12 rounded-2xl bg-electricBlue/10 text-electricBlue flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-bullseye"></i></div>
+                    <h5 class="text-lg font-bold text-white mb-2">Precision Strategy</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Tailored marketing campaigns engineered around market data and audience psychology.</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-neonPurple/10 text-neonPurple flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-microchip"></i></div>
+                    <h5 class="text-lg font-bold text-white mb-2">Advanced Tech & AI</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Leveraging cutting-edge web development, SEO architecture, and automated AI lead workflows.</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl">
+                    <div class="w-14 h-14 rounded-2xl bg-neonCyan/10 text-neonCyan flex items-center justify-center text-xl mb-6"><i class="fa-solid fa-handshake"></i></div>
+                    <h5 class="text-lg font-bold text-white mb-2">Uncompromising Ethics</h5>
+                    <p class="text-xs text-gray-400 leading-relaxed">Full transparency, honest communication, and dedicated long-term partnership.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Founder Section -->
+        <section id="founder" class="py-12">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto border border-white/10 text-center sm:text-left grid grid-cols-1 sm:grid-cols-12 gap-8 items-center">
+                <div class="sm:col-span-4 flex justify-center">
+                    <div class="w-40 h-40 rounded-3xl bg-gradient-to-tr from-gray-900 to-gray-800 border-2 border-electricBlue/40 flex items-center justify-center text-electricBlue text-4xl font-black shadow-xl">SG</div>
+                </div>
+                <div class="sm:col-span-8">
+                    <h3 class="text-2xl font-black text-white mb-1">Shibam Ghosh</h3>
+                    <p class="text-xs text-electricBlue font-mono uppercase tracking-widest mb-4">Founder & CEO, Northeast Digital</p>
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4">"In today's digital economy, businesses need a high-performance ecosystem. At Northeast Digital, we build powerful strategies that turn attention into sustainable revenue."</p>
+                    <p class="text-xs text-gray-400">Guwahati, Assam, India</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (20 Core Services) -->
+        <section id="services" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Our Expertise</h3>
+                <h4 class="text-3xl sm:text-5xl font-black">20 Comprehensive Digital Services</h4>
+                <p class="text-gray-400 mt-3 text-sm">Everything your brand needs to scale online.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-code text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Website Development</h5><p class="text-xs text-gray-400">High-performance custom web apps.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-window-maximize text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Landing Pages</h5><p class="text-xs text-gray-400">High-converting sales funnels.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-magnifying-glass-chart text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">SEO Services</h5><p class="text-xs text-gray-400">Rank #1 on organic Google searches.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-location-dot text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Local SEO</h5><p class="text-xs text-gray-400">Dominate local map searches.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-brands fa-google text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Google Ads</h5><p class="text-xs text-gray-400">Targeted high-intent PPC campaigns.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-brands fa-meta text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Meta Ads</h5><p class="text-xs text-gray-400">Precision Facebook & Instagram ads.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-brands fa-instagram text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Instagram Marketing</h5><p class="text-xs text-gray-400">Follower growth & viral reels.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-share-nodes text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Social Media Management</h5><p class="text-xs text-gray-400">Active engagement & content calendars.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-shield-cat text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Brand Identity</h5><p class="text-xs text-gray-400">Cohesive brand voice & guidelines.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-pen-nib text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Graphic Design</h5><p class="text-xs text-gray-400">Stunning visual creatives.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-signature text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Logo Design</h5><p class="text-xs text-gray-400">Memorable iconic brand marks.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-video text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Video Editing</h5><p class="text-xs text-gray-400">Cinematic reels & retention editing.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-wand-magic-sparkles text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Motion Graphics</h5><p class="text-xs text-gray-400">Dynamic animations & visuals.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-brain text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">AI Automation</h5><p class="text-xs text-gray-400">Intelligent chatbots & workflows.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-envelope-open-text text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Email Marketing</h5><p class="text-xs text-gray-400">Automated retention campaigns.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-brands fa-whatsapp text-green-400 text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">WhatsApp Marketing</h5><p class="text-xs text-gray-400">Conversational sales funnels.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-pen-clip text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Content Strategy</h5><p class="text-xs text-gray-400">Data-backed storytelling.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-file-pen text-neonPurple text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Content Writing</h5><p class="text-xs text-gray-400">Persuasive copy & blogs.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-store text-neonCyan text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Google Business Profile</h5><p class="text-xs text-gray-400">Local map optimization.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><i class="fa-solid fa-chart-line text-electricBlue text-xl mb-3"></i><h5 class="font-bold text-white text-sm mb-1">Performance Marketing</h5><p class="text-xs text-gray-400">ROI-focused ad management.</p></div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Our Process</h3>
+                <h4 class="text-3xl sm:text-4xl font-black">How We Scale Your Brand</h4>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl relative"><span class="text-4xl font-black text-electricBlue/20 absolute top-4 right-4 font-mono">01</span><h5 class="font-bold text-white text-base mb-2">Discovery</h5><p class="text-xs text-gray-400">Deep dive into your business goals, competitors, and audience.</p></div>
+                <div class="glass-card p-6 rounded-2xl relative"><span class="text-4xl font-black text-neonPurple/20 absolute top-4 right-4 font-mono">02</span><h5 class="font-bold text-white text-base mb-2">Strategy</h5><p class="text-xs text-gray-400">Custom marketing architecture and asset creation plan.</p></div>
+                <div class="glass-card p-6 rounded-2xl relative"><span class="text-4xl font-black text-neonCyan/20 absolute top-4 right-4 font-mono">03</span><h5 class="font-bold text-white text-base mb-2">Execution</h5><p class="text-xs text-gray-400">Launching high-impact campaigns and deploying web tech.</p></div>
+                <div class="glass-card p-6 rounded-2xl relative"><span class="text-4xl font-black text-electricBlue/20 absolute top-4 right-4 font-mono">04</span><h5 class="font-bold text-white text-base mb-2">Scale</h5><p class="text-xs text-gray-400">Continuous AI optimization and revenue growth.</p></div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Portfolio</h3>
+                <h4 class="text-3xl sm:text-4xl font-black">Our Latest Projects</h4>
+                <p class="text-gray-400 mt-2 text-xs">Published case studies and client successes managed by Shibam Ghosh.</p>
+            </div>
+            <div id="public-portfolio-container" class="glass-card p-12 rounded-3xl text-center">
+                <i class="fa-solid fa-rocket text-4xl text-electricBlue mb-4"></i>
+                <h5 class="text-lg font-bold text-white">No published portfolio projects at the moment.</h5>
+                <p class="text-xs text-gray-400 mt-2">Projects published from the Admin Dashboard will appear here immediately.</p>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Pricing</h3>
+                <h4 class="text-3xl sm:text-4xl font-black">Transparent Growth Plans</h4>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <h5 class="font-bold text-white text-lg mb-2">Starter Growth</h5>
+                        <p class="text-xs text-gray-400 mb-6">For local businesses starting digital expansion.</p>
+                        <div class="text-3xl font-black text-white mb-6">$999<span class="text-xs text-gray-400 font-normal"> /mo</span></div>
+                        <ul class="space-y-3 text-xs text-gray-300 mb-8">
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Social Media Management</li>
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Basic SEO Optimization</li>
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Monthly Analytics Report</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 rounded-xl glass text-center text-xs font-bold uppercase hover:border-electricBlue transition">Choose Starter</a>
+                </div>
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between border-electricBlue/60 bg-gradient-to-b from-electricBlue/10 to-transparent relative shadow-xl shadow-electricBlue/10">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-electricBlue to-neonPurple text-black text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</span>
+                    <div>
+                        <h5 class="font-bold text-white text-lg mb-2">Pro Accelerator</h5>
+                        <p class="text-xs text-gray-400 mb-6">For aggressive brand scaling & high ad ROI.</p>
+                        <div class="text-3xl font-black text-electricBlue mb-6">$2,499<span class="text-xs text-gray-400 font-normal"> /mo</span></div>
+                        <ul class="space-y-3 text-xs text-gray-300 mb-8">
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Meta & Google Ads Management</li>
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Custom Web Development & SEO</li>
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> AI Chatbot Lead Automation</li>
+                            <li><i class="fa-solid fa-check text-electricBlue mr-2"></i> Dedicated Strategist</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black text-center text-xs font-bold uppercase hover:opacity-95 transition">Choose Pro</a>
+                </div>
+                <div class="glass-card p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <h5 class="font-bold text-white text-lg mb-2">Enterprise Empire</h5>
+                        <p class="text-xs text-gray-400 mb-6">For complete omnichannel market dominance.</p>
+                        <div class="text-3xl font-black text-white mb-6">$4,999<span class="text-xs text-gray-400 font-normal"> /mo</span></div>
+                        <ul class="space-y-3 text-xs text-gray-300 mb-8">
+                            <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Full Omnichannel Growth</li>
+                            <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Unlimited Video & Creative Edits</li>
+                            <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Advanced CRM & AI Automations</li>
+                            <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> 24/7 Priority Support</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full py-3 rounded-xl glass text-center text-xs font-bold uppercase hover:border-neonPurple transition">Contact Sales</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visitor Downloads / Resource Section -->
+        <section id="visitor-downloads" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Public Resources</h3>
+                <h4 class="text-3xl sm:text-4xl font-black">Shared Files & Downloads</h4>
+                <p class="text-gray-400 mt-2 text-xs">Files uploaded by Shibam Ghosh via the Admin Dashboard appear instantly here for visitors.</p>
+            </div>
+            <div id="visitor-files-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Populated dynamically from Admin uploads -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12">
+            <div class="glass-card p-8 sm:p-16 rounded-3xl max-w-5xl mx-auto border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Get in Touch</h3>
+                        <h4 class="text-3xl font-black mb-6">Let's Discuss Your Project</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">Reach out to Northeast Digital in Guwahati, Assam for professional digital strategy.</p>
+                    </div>
+                    <div class="space-y-4 text-xs text-gray-300">
+                        <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl glass flex items-center justify-center text-electricBlue"><i class="fa-solid fa-phone"></i></div><span>+91 60016 14427</span></div>
+                        <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl glass flex items-center justify-center text-neonPurple"><i class="fa-solid fa-envelope"></i></div><span>hellonortheastdigital@gmail.com</span></div>
+                        <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl glass flex items-center justify-center text-neonCyan"><i class="fa-solid fa-location-dot"></i></div><span>Guwahati, Assam, India</span></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div><label class="block text-xs font-bold text-gray-400 uppercase mb-2">Your Name</label><input type="text" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:border-electricBlue focus:outline-none" placeholder="Shibam Ghosh"></div>
+                            <div><label class="block text-xs font-bold text-gray-400 uppercase mb-2">Email</label><input type="email" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:border-electricBlue focus:outline-none" placeholder="shibam@example.com"></div>
+                        </div>
+                        <div><label class="block text-xs font-bold text-gray-400 uppercase mb-2">Project Requirements</label><textarea rows="4" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:border-electricBlue focus:outline-none" placeholder="Tell us about your brand goals..."></textarea></div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-electricBlue/20">Send Proposal Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark py-12 px-6 text-center text-xs text-gray-400">
+        <p class="mb-2">Northeast Digital | Founder: Shibam Ghosh | Guwahati, Assam, India</p>
+        <p>&copy; 2026 Northeast Digital. All rights reserved.</p>
+    </footer>
+
+    <!-- SECURE ADMIN LOGIN MODAL -->
+    <div id="login-modal" class="fixed inset-0 z-[200] bg-black/85 backdrop-blur-md items-center justify-center p-6 hidden-modal modal">
+        <div class="glass-card w-full max-w-md p-8 rounded-3xl relative border border-white/10 shadow-2xl">
+            <button onclick="closeLoginModal()" aria-label="Close modal" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-black text-white">Admin Portal Login</h3>
+                <p class="text-xs text-gray-400 mt-1">Founder: Shibam Ghosh</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Username</label>
+                    <input type="text" id="login-user" required autocomplete="username" class="w-full bg-dark/80 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none" value="northeastdigital">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Password</label>
+                    <input type="password" id="login-pass" required autocomplete="current-password" class="w-full bg-dark/80 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none" value="Northeast@6001">
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 shadow-lg shadow-electricBlue/20 transition">
+                    Access Dashboard
+                </button>
+                <div class="bg-white/5 p-3 rounded-xl border border-white/10 text-center mt-4">
+                    <p class="text-[11px] text-gray-300 font-mono">Username: <strong class="text-electricBlue">northeastdigital</strong></p>
+                    <p class="text-[11px] text-gray-300 font-mono mt-1">Password: <strong class="text-electricBlue">Northeast@6001</strong></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FULL ADMIN SAAS DASHBOARD (24 Sections) -->
+    <div id="admin-dashboard" class="fixed inset-0 z-[300] bg-dark hidden overflow-y-auto">
+        <div class="flex h-screen">
+            <aside class="w-64 glass border-r border-white/10 flex flex-col justify-between hidden md:flex shrink-0">
+                <div class="p-6 overflow-y-auto h-full space-y-1">
+                    <div class="mb-6">
+                        <span class="text-sm font-black tracking-wider text-white block">ADMIN PORTAL</span>
+                        <span class="text-[10px] block text-electricBlue font-mono">SHIBAM GHOSH</span>
+                    </div>
+                    <button onclick="switchAdminTab('dashboard')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 text-electricBlue bg-white/5 transition text-xs"><i class="fa-solid fa-chart-pie w-5"></i> Dashboard</button>
+                    <button onclick="switchAdminTab('clients')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-users w-5"></i> Clients</button>
+                    <button onclick="switchAdminTab('projects')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-diagram-project w-5"></i> Projects</button>
+                    <button onclick="switchAdminTab('portfolio')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-rocket w-5"></i> Portfolio</button>
+                    <button onclick="switchAdminTab('payments')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-credit-card w-5"></i> Payments</button>
+                    <button onclick="switchAdminTab('invoices')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-file-invoice-dollar w-5"></i> Invoices</button>
+                    <button onclick="switchAdminTab('analytics')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-chart-line w-5"></i> Analytics</button>
+                    <button onclick="switchAdminTab('calendar')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-calendar w-5"></i> Calendar</button>
+                    <button onclick="switchAdminTab('tasks')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-list-check w-5"></i> Tasks</button>
+                    <button onclick="switchAdminTab('crm')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-address-book w-5"></i> CRM / Leads</button>
+                    <button onclick="switchAdminTab('notifications')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-bell w-5"></i> Notifications</button>
+                    <button onclick="switchAdminTab('files')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-folder-open w-5"></i> Files (Uploader)</button>
+                    <button onclick="switchAdminTab('blog')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-blog w-5"></i> Blog & SEO</button>
+                    <button onclick="switchAdminTab('settings')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-gear w-5"></i> Settings</button>
+                    <button onclick="switchAdminTab('security')" class="admin-nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition text-xs"><i class="fa-solid fa-shield-halved w-5"></i> Security</button>
+                    <button onclick="logoutAdmin()" class="w-full mt-4 py-2.5 rounded-xl glass text-red-400 text-xs font-bold flex items-center justify-center gap-2 hover:bg-red-500/10 transition"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+                </div>
+            </aside>
+            <div class="flex-1 flex flex-col h-screen overflow-hidden">
+                <header class="h-20 glass border-b border-white/10 px-8 flex items-center justify-between shrink-0">
+                    <h3 id="admin-page-title" class="text-lg font-bold text-white">SaaS Admin Dashboard</h3>
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs text-electricBlue font-mono">Shibam Ghosh (Admin)</span>
+                        <button onclick="logoutAdmin()" class="md:hidden px-3 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold">Logout</button>
+                    </div>
+                </header>
+                <div class="flex-1 overflow-y-auto p-8 space-y-8">
+                    
+                    <!-- 1. Dashboard Tab -->
+                    <div id="admin-tab-dashboard" class="admin-tab space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Total Revenue</p><h5 class="text-3xl font-black text-electricBlue">$48,250</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Active Clients</p><h5 class="text-3xl font-black text-neonPurple">14</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Pending Amount</p><h5 class="text-3xl font-black text-yellow-400">$2,100</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Active Projects</p><h5 class="text-3xl font-black text-neonCyan">8</h5></div>
+                        </div>
+                        <div class="glass-card p-8 rounded-3xl">
+                            <h5 class="font-bold text-white text-base mb-4">Revenue Growth Chart</h5>
+                            <canvas id="adminRevenueChart" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 2. Clients Tab -->
+                    <div id="admin-tab-clients" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Clients Management</h5><p class="text-xs text-gray-400">Manage agency clients and active accounts.</p></div>
+                    </div>
+
+                    <!-- 3. Projects Tab -->
+                    <div id="admin-tab-projects" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Active Projects</h5><p class="text-xs text-gray-400">Track milestones, deliverables, and revision history.</p></div>
+                    </div>
+
+                    <!-- 4. Portfolio Manager Tab -->
+                    <div id="admin-tab-portfolio" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl max-w-xl">
+                            <h5 class="text-lg font-bold text-white mb-4">Publish Portfolio Project</h5>
+                            <form onsubmit="handlePublishPortfolio(event)" class="space-y-4">
+                                <input type="text" id="pf-title" placeholder="Project Title" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <input type="text" id="pf-client" placeholder="Client Name" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <textarea id="pf-desc" placeholder="Project Description" rows="3" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs"></textarea>
+                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase hover:opacity-90">Publish to Public Site</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- 5. Payments Tab -->
+                    <div id="admin-tab-payments" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Payment Tracking</h5><p class="text-xs text-gray-400">Monitor paid invoices and upcoming dues.</p></div>
+                    </div>
+
+                    <!-- 6. Invoices Tab -->
+                    <div id="admin-tab-invoices" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">GST Invoice Generator</h5><p class="text-xs text-gray-400">Generate, download, and send tax invoices.</p></div>
+                    </div>
+
+                    <!-- 7. Analytics Tab -->
+                    <div id="admin-tab-analytics" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Advanced Analytics</h5><p class="text-xs text-gray-400">Traffic, leads, conversions, and service popularity.</p></div>
+                    </div>
+
+                    <!-- 8. Calendar Tab -->
+                    <div id="admin-tab-calendar" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Agency Calendar</h5><p class="text-xs text-gray-400">Meeting schedules and campaign launch dates.</p></div>
+                    </div>
+
+                    <!-- 9. Tasks Tab -->
+                    <div id="admin-tab-tasks" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Task Manager</h5><p class="text-xs text-gray-400">Assign and track internal team deliverables.</p></div>
+                    </div>
+
+                    <!-- 10. CRM Tab -->
+                    <div id="admin-tab-crm" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">CRM & Lead Pipeline</h5><p class="text-xs text-gray-400">Track client enquiries, meeting notes, and follow-ups.</p></div>
+                    </div>
+
+                    <!-- 11. Notifications Tab -->
+                    <div id="admin-tab-notifications" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">System Notifications</h5><p class="text-xs text-gray-400">Email and WhatsApp automation logs.</p></div>
+                    </div>
+
+                    <!-- 12. Files Tab (Uploader for Visitors & Clients) -->
+                    <div id="admin-tab-files" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl space-y-6">
+                            <h5 class="text-lg font-bold text-white">Upload Files for Public Visitors</h5>
+                            <div class="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center relative hover:border-electricBlue transition">
+                                <input type="file" id="file-uploader" onchange="handleAdminFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-cloud-arrow-up text-4xl text-electricBlue mb-3"></i>
+                                <h6 class="font-bold text-white text-sm">Click or Drag & Drop Images, PDFs, Videos, Excel, Word, ZIP</h6>
+                                <p class="text-xs text-gray-400 mt-1">Uploaded files instantly appear in the Public Resources section on the main page.</p>
+                            </div>
+                            <div id="admin-uploaded-files-list" class="space-y-3"></div>
+                        </div>
+                    </div>
+
+                    <!-- 13. Blog Tab -->
+                    <div id="admin-tab-blog" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl"><h5 class="text-lg font-bold text-white mb-4">Blog & Case Studies</h5><p class="text-xs text-gray-400">Publish articles with SEO meta titles and descriptions.</p></div>
+                    </div>
+
+                    <!-- 14. Settings Tab -->
+                    <div id="admin-tab-settings" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl max-w-xl">
+                            <h5 class="text-lg font-bold text-white mb-4">Agency Settings</h5>
+                            <div class="space-y-4">
+                                <input type="text" value="Northeast Digital" class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <input type="text" value="Shibam Ghosh" class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <button onclick="alert('Settings saved!')" class="px-5 py-2 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase">Save Settings</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15. Security Tab -->
+                    <div id="admin-tab-security" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl max-w-xl">
+                            <h5 class="text-lg font-bold text-white mb-4">Security & Authentication</h5>
+                            <p class="text-xs text-gray-400 mb-4">Session active for Shibam Ghosh (Admin).</p>
+                            <button onclick="alert('Password updated successfully!')" class="px-5 py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase">Change Admin Password</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot UI -->
+    <div id="chatbot-container" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 glass-card rounded-3xl shadow-2xl border border-white/10 hidden flex flex-col overflow-hidden">
+        <div class="p-4 bg-dark/80 border-b border-white/10 flex items-center justify-between">
+            <h6 class="font-bold text-xs text-white">Northeast Digital Bot</h6>
+            <button onclick="closeChatbot()" aria-label="Close chatbot" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3 text-xs text-gray-300 flex flex-col">
+            <div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">Hello! How can Northeast Digital assist your business growth today?</div>
+        </div>
+        <div class="p-3 border-t border-white/10 bg-dark/80 flex items-center gap-2">
+            <input type="text" id="chatbot-input" onkeypress="if(event.key==='Enter') sendChatMessage()" placeholder="Type a message..." class="w-full bg-dark/60 border border-white/10 rounded-xl px-3 py-2 text-white text-xs focus:outline-none">
+            <button onclick="sendChatMessage()" aria-label="Send message" class="w-9 h-9 rounded-xl bg-electricBlue text-black flex items-center justify-center shrink-0"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Scroll Progress Bar & Back to Top visibility
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+
+            const btp = document.getElementById('back-to-top');
+            if (winScroll > 300) {
+                btp.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                btp.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // Background Neural Canvas
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+
+        const particles = Array.from({ length: 35 }, () => ({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, radius: Math.random() * 1.5 + 1 }));
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 240, 255, 0.12)';
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.04)';
+            particles.forEach((p, index) => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    if (Math.hypot(p.x - p2.x, p.y - p2.y) < 110) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 600);
+            renderPublicPortfolio();
+            renderVisitorFiles();
+        });
+
+        // Modal Controls
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('show-modal');
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('show-modal');
+            modal.classList.add('hidden-modal');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('login-user').value.trim();
+            const p = document.getElementById('login-pass').value.trim();
+
+            if (u === 'northeastdigital' && p === 'Northeast@6001') {
+                closeLoginModal();
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                renderAdminFilesList();
+                initRevenueChart();
+            } else {
+                alert('Invalid credentials! Username: northeastdigital | Password: Northeast@6001');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('text-electricBlue', 'bg-white/5'));
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            event.currentTarget.classList.add('text-electricBlue', 'bg-white/5');
+            const titles = {
+                dashboard: 'SaaS Admin Dashboard', clients: 'Clients Management', projects: 'Active Projects',
+                portfolio: 'Portfolio Manager', payments: 'Payment Tracking', invoices: 'GST Invoice Generator',
+                analytics: 'Advanced Analytics', calendar: 'Agency Calendar', tasks: 'Task Manager',
+                crm: 'CRM & Lead Pipeline', notifications: 'System Notifications', files: 'File Manager & Uploader',
+                blog: 'Blog & Case Studies', settings: 'Agency Settings', security: 'Security & Authentication'
+            };
+            document.getElementById('admin-page-title').innerText = titles[tabName] || 'Admin Dashboard';
+            if(tabName === 'files') renderAdminFilesList();
+            if(tabName === 'dashboard') initRevenueChart();
+        }
+
+        let revenueChartInstance = null;
+        function initRevenueChart() {
+            const ctxChart = document.getElementById('adminRevenueChart');
+            if(!ctxChart) return;
+            if(revenueChartInstance) revenueChartInstance.destroy();
+            revenueChartInstance = new Chart(ctxChart, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue ($)',
+                        data: [12000, 19000, 28000, 35000, 42000, 48250],
+                        borderColor: '#00F0FF',
+                        backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+        }
+
+        function handlePublishPortfolio(e) {
+            e.preventDefault();
+            const projects = JSON.parse(localStorage.getItem('nd_published_portfolio') || '[]');
+            projects.push({ title: document.getElementById('pf-title').value, client: document.getElementById('pf-client').value, desc: document.getElementById('pf-desc').value });
+            localStorage.setItem('nd_published_portfolio', JSON.stringify(projects));
+            alert('Project published successfully to public website!');
+            e.target.reset();
+            renderPublicPortfolio();
+        }
+
+        function renderPublicPortfolio() {
+            const projects = JSON.parse(localStorage.getItem('nd_published_portfolio') || '[]');
+            const container = document.getElementById('public-portfolio-container');
+            if(!container) return;
+            if(projects.length === 0) {
+                container.innerHTML = `<i class="fa-solid fa-rocket text-4xl text-electricBlue mb-4"></i><h5 class="text-lg font-bold text-white">No published portfolio projects at the moment.</h5><p class="text-xs text-gray-400 mt-2">Projects published by Shibam Ghosh from the Admin Dashboard will appear here immediately.</p>`;
+                return;
+            }
+            container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left" id="portfolio-grid"></div>`;
+            const grid = document.getElementById('portfolio-grid');
+            projects.forEach(p => {
+                grid.innerHTML += `<div class="glass-card p-6 rounded-2xl"><h5 class="font-bold text-white text-base mb-1">${p.title}</h5><p class="text-xs text-electricBlue mb-3">Client: ${p.client}</p><p class="text-xs text-gray-300">${p.desc}</p></div>`;
+            });
+        }
+
+        // Handle Admin File Uploads & Visitor Portal Display
+        function handleAdminFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(uploadEvent) {
+                const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+                const newFile = {
+                    id: Date.now(),
+                    name: file.name,
+                    type: file.type.startsWith('image/') ? 'image' : 'file',
+                    dataUrl: uploadEvent.target.result,
+                    size: (file.size / (1024*1024)).toFixed(1) + ' MB'
+                };
+                files.push(newFile);
+                localStorage.setItem('nd_visitor_files', JSON.stringify(files));
+                renderAdminFilesList();
+                renderVisitorFiles();
+                alert('File uploaded successfully and made available to visitors!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderAdminFilesList() {
+            const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            const listContainer = document.getElementById('admin-uploaded-files-list');
+            if (!listContainer) return;
+            if (files.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">No files uploaded yet.</p>`;
+                return;
+            }
+            listContainer.innerHTML = '';
+            files.forEach(f => {
+                listContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid ${f.type === 'image' ? 'fa-image text-neonCyan' : 'fa-file-pdf text-electricBlue'} text-lg"></i>
+                            <div><h6 class="font-bold text-white text-xs">${f.name}</h6><span class="text-[10px] text-gray-400">${f.size}</span></div>
+                        </div>
+                        <button onclick="deleteVisitorFile(${f.id})" class="text-red-400 hover:text-red-300 text-xs px-3 py-1"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteVisitorFile(id) {
+            let files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            files = files.filter(f => f.id !== id);
+            localStorage.setItem('nd_visitor_files', JSON.stringify(files));
+            renderAdminFilesList();
+            renderVisitorFiles();
+        }
+
+        function renderVisitorFiles() {
+            const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            const grid = document.getElementById('visitor-files-grid');
+            if (!grid) return;
+            if (files.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 glass-card p-8 rounded-3xl text-center"><p class="text-xs text-gray-400">No public files shared by the agency yet.</p></div>`;
+                return;
+            }
+            grid.innerHTML = '';
+            files.forEach(f => {
+                if (f.type === 'image') {
+                    grid.innerHTML += `
+                        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10">
+                            <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-48 object-cover">
+                            <div class="p-4 flex items-center justify-between">
+                                <span class="text-xs font-bold text-white truncate">${f.name}</span>
+                                <a href="${f.dataUrl}" download="${f.name}" class="px-3 py-1.5 rounded-lg bg-electricBlue text-black font-bold text-[10px] uppercase">Download</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    grid.innerHTML += `
+                        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between border border-white/10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fa-solid fa-file-lines text-3xl text-electricBlue"></i>
+                                <div><h5 class="font-bold text-white text-sm truncate">${f.name}</h5><span class="text-[10px] text-gray-400">${f.size}</span></div>
+                            </div>
+                            <a href="${f.dataUrl}" download="${f.name}" class="w-full py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase text-center block">Download File</a>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // Chatbot UI
+        function openChatbot() { document.getElementById('chatbot-container').classList.toggle('hidden'); }
+        function closeChatbot() { document.getElementById('chatbot-container').classList.add('hidden'); }
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+            const messages = document.getElementById('chatbot-messages');
+            messages.innerHTML += `<div class="bg-electricBlue text-black p-3 rounded-2xl max-w-[85%] self-end font-medium">${msg}</div>`;
+            input.value = '';
+            setTimeout(() => {
+                messages.innerHTML += `<div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">Thank you for your message! Shibam Ghosh and our team at Northeast Digital will connect with you soon. You can also reach us via WhatsApp at +91 60016 14427.</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 500);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Proposal request sent successfully! Shibam Ghosh and our team will get back to you within 24 hours.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
