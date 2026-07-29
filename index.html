@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northeast Digital | Premier Digital Marketing Agency in Guwahati, Assam</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Northeast Digital is a premier digital marketing agency in Guwahati, Assam founded by Shibam Ghosh. Specializing in digital growth, web development, SEO, ads, and AI automation.">
+    <meta name="keywords" content="Northeast Digital, Digital Marketing Agency, Digital Marketing in Assam, Digital Marketing in Guwahati, Website Development, SEO Services, Social Media Marketing, Google Ads, Meta Ads, Instagram Marketing, AI Automation, Shibam Ghosh">
+    <link rel="canonical" href="https://northeastdigital.agency">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#05050A',
+                        cardDark: '#0A0A12',
+                        electricBlue: '#00F0FF',
+                        neonPurple: '#9D00FF',
+                        neonCyan: '#00FFCC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05050A; }
+        ::-webkit-scrollbar-thumb { background: #1a1a2e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+        body { background-color: #05050A; color: #F3F4F6; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        .glass {
+            background: rgba(10, 10, 18, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glow-text { text-shadow: 0 0 25px rgba(0, 240, 255, 0.5); }
+        .mesh-gradient {
+            background-image: radial-gradient(at 15% 20%, hsla(265,89%,30%,0.22) 0px, transparent 50%),
+                              radial-gradient(at 85% 80%, hsla(185,100%,30%,0.18) 0px, transparent 50%);
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .modal { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .hidden-modal { opacity: 0; pointer-events: none; transform: scale(0.95); display: none !important; }
+        .show-modal { opacity: 1; pointer-events: auto; transform: scale(1); display: flex !important; }
+    </style>
+</head>
+<body class="selection:bg-electricBlue selection:text-black">
+
+    <canvas id="neural-canvas"></canvas>
+    <div class="fixed inset-0 mesh-gradient pointer-events-none z-[-2]"></div>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <a href="https://wa.me/916001614427" target="_blank" aria-label="WhatsApp Chat" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10">WhatsApp</span>
+        </a>
+        <a href="https://instagram.com/north_east_digital" target="_blank" aria-label="Instagram Profile" class="w-12 h-12 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-brands fa-instagram text-xl"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10">Instagram</span>
+        </a>
+        <a href="mailto:hellonortheastdigital@gmail.com" aria-label="Send Email" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-solid fa-envelope text-lg"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10">Email</span>
+        </a>
+        <button onclick="openChatbot()" aria-label="AI Assistant" class="w-12 h-12 bg-gradient-to-r from-electricBlue to-neonPurple text-black rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300 group relative">
+            <i class="fa-solid fa-robot text-lg font-bold"></i>
+            <span class="absolute right-14 bg-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-white/10">AI Bot</span>
+        </button>
+        <button onclick="scrollToTop()" id="back-to-top" aria-label="Back to Top" class="w-12 h-12 glass text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition duration-300">
+            <i class="fa-solid fa-arrow-up text-sm"></i>
+        </button>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electricBlue to-neonPurple p-0.5 flex items-center justify-center">
+                    <div class="w-full h-full bg-dark rounded-[10px] flex items-center justify-center">
+                        <span class="text-electricBlue font-black text-lg">NE</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-wider text-white">NORTHEAST</span>
+                    <span class="text-xs block tracking-widest text-electricBlue font-semibold">DIGITAL</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-electricBlue transition">Home</a>
+                <a href="#about" class="hover:text-electricBlue transition">About</a>
+                <a href="#founder" class="hover:text-electricBlue transition">Founder</a>
+                <a href="#services" class="hover:text-electricBlue transition">Services</a>
+                <a href="#portfolio" class="hover:text-electricBlue transition">Portfolio</a>
+                <a href="#visitor-downloads" class="hover:text-electricBlue transition">Visitor Files</a>
+                <a href="#contact" class="hover:text-electricBlue transition">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="openLoginModal()" class="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider glass hover:border-electricBlue text-white transition flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-electricBlue"></i> Admin Login
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-24">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[75vh] flex flex-col justify-center items-center text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-electricBlue/30 text-electricBlue text-xs font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-electricBlue animate-ping"></span>
+                Digital Marketing Agency in Guwahati, Assam
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6">
+                Your Growth, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-electricBlue via-neonPurple to-neonCyan glow-text">Our Digital Strategy.</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mb-10 leading-relaxed">
+                Founded by Shibam Ghosh in Guwahati, Northeast Digital delivers elite marketing, website development, SEO, ads, and AI automation.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="openLoginModal()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-electricBlue to-neonPurple text-black font-bold uppercase tracking-wider text-sm shadow-xl shadow-electricBlue/25 hover:scale-105 transition">
+                    Admin Portal Login
+                </button>
+                <a href="https://instagram.com/north_east_digital" target="_blank" class="px-8 py-4 rounded-2xl glass text-white font-bold uppercase tracking-wider text-sm hover:border-electricBlue transition">
+                    Instagram (@north_east_digital)
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">About Us</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">Rooted in Assam, Scaling Globally</h3>
+                <p class="text-gray-400 mt-4 text-sm">Northeast Digital bridges regional brands with global digital dominance through high-impact marketing and web tech.</p>
+            </div>
+        </section>
+
+        <!-- Founder Section -->
+        <section id="founder" class="py-12">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto border border-white/10 text-center sm:text-left grid grid-cols-1 sm:grid-cols-12 gap-8 items-center">
+                <div class="sm:col-span-4 flex justify-center">
+                    <div class="w-40 h-40 rounded-2xl bg-gradient-to-tr from-gray-900 to-gray-800 border border-electricBlue/40 flex items-center justify-center text-electricBlue text-4xl font-black">SG</div>
+                </div>
+                <div class="sm:col-span-8">
+                    <h3 class="text-2xl font-black text-white mb-2">Shibam Ghosh</h3>
+                    <p class="text-xs text-electricBlue font-mono uppercase tracking-widest mb-4">Founder & CEO</p>
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">Leading Northeast Digital with a passion for high-performance marketing, cutting-edge technology, and transparent client partnerships.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Expertise</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">Core Digital Services</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl"><h4 class="font-bold text-white mb-2">Social Media & Ads</h4><p class="text-xs text-gray-400">Meta & Google ad scaling with high ROAS.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><h4 class="font-bold text-white mb-2">Website Development</h4><p class="text-xs text-gray-400">Blazing fast web apps & custom UI/UX.</p></div>
+                <div class="glass-card p-6 rounded-2xl"><h4 class="font-bold text-white mb-2">SEO & AI Automation</h4><p class="text-xs text-gray-400">Rank #1 on Google with automated lead workflows.</p></div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Portfolio</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">Published Projects</h3>
+            </div>
+            <div id="public-portfolio-container" class="glass-card p-12 rounded-3xl text-center">
+                <i class="fa-solid fa-rocket text-4xl text-electricBlue mb-4"></i>
+                <h4 class="text-lg font-bold text-white">No published portfolio projects at the moment.</h4>
+                <p class="text-xs text-gray-400 mt-2">Projects published by Shibam Ghosh from the Admin Dashboard will appear here immediately.</p>
+            </div>
+        </section>
+
+        <!-- VISITOR PORTAL / DOWNLOADS SECTION -->
+        <section id="visitor-downloads" class="py-12">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold text-electricBlue uppercase tracking-widest mb-3">Public Downloads</h2>
+                <h3 class="text-3xl sm:text-4xl font-black">Files & Resources Shared for Visitors</h3>
+                <p class="text-gray-400 mt-2 text-xs">Files uploaded by Shibam Ghosh via the Admin Dashboard appear instantly here for visitors to view or download.</p>
+            </div>
+            <div id="visitor-files-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Populated dynamically from Admin uploads -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl max-w-3xl mx-auto border border-white/10 text-center">
+                <h3 class="text-2xl font-black text-white mb-4">Ready to Grow Your Brand?</h3>
+                <p class="text-xs sm:text-sm text-gray-400 mb-6">Connect with us directly via WhatsApp, Instagram, or Email.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://wa.me/916001614427" target="_blank" class="px-6 py-3 rounded-xl bg-green-500 text-white font-bold text-xs uppercase flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://instagram.com/north_east_digital" target="_blank" class="px-6 py-3 rounded-xl bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 text-white font-bold text-xs uppercase flex items-center gap-2"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                    <a href="mailto:hellonortheastdigital@gmail.com" class="px-6 py-3 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase flex items-center gap-2"><i class="fa-solid fa-envelope"></i> Email</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark py-12 px-6 text-center text-xs text-gray-400">
+        <p class="mb-2">Northeast Digital | Founder: Shibam Ghosh | Guwahati, Assam, India</p>
+        <p>&copy; 2026 Northeast Digital. All rights reserved.</p>
+    </footer>
+
+    <!-- SECURE LOGIN MODAL -->
+    <div id="login-modal" class="fixed inset-0 z-[200] bg-black/85 backdrop-blur-md items-center justify-center p-6 hidden-modal modal">
+        <div class="glass-card w-full max-w-md p-8 rounded-3xl relative border border-white/10 shadow-2xl">
+            <button onclick="closeLoginModal()" aria-label="Close modal" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-black text-white">Admin Portal Login</h3>
+                <p class="text-xs text-gray-400 mt-1">Founder: Shibam Ghosh</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Username</label>
+                    <input type="text" id="login-user" required autocomplete="username" class="w-full bg-dark/80 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none" value="northeastdigital">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase mb-2">Password</label>
+                    <input type="password" id="login-pass" required autocomplete="current-password" class="w-full bg-dark/80 border border-white/20 rounded-xl px-4 py-3 text-white text-sm focus:border-electricBlue focus:outline-none" value="Northeast@6001">
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase tracking-wider hover:opacity-90 shadow-lg shadow-electricBlue/20 transition">
+                    Access Dashboard
+                </button>
+                <div class="bg-white/5 p-3 rounded-xl border border-white/10 text-center mt-4">
+                    <p class="text-[11px] text-gray-300 font-mono">Username: <strong class="text-electricBlue">northeastdigital</strong></p>
+                    <p class="text-[11px] text-gray-300 font-mono mt-1">Password: <strong class="text-electricBlue">Northeast@6001</strong></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD CONTAINER -->
+    <div id="admin-dashboard" class="fixed inset-0 z-[300] bg-dark hidden overflow-y-auto">
+        <div class="flex h-screen">
+            <aside class="w-64 glass border-r border-white/10 flex flex-col justify-between hidden md:flex">
+                <div class="p-6">
+                    <div class="mb-8">
+                        <span class="text-sm font-black tracking-wider text-white block">ADMIN PORTAL</span>
+                        <span class="text-[10px] block text-electricBlue font-mono">SHIBAM GHOSH</span>
+                    </div>
+                    <nav class="space-y-2 text-xs font-medium text-gray-400">
+                        <button onclick="switchAdminTab('analytics')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-electricBlue bg-white/5 transition"><i class="fa-solid fa-chart-pie"></i> Analytics & Revenue</button>
+                        <button onclick="switchAdminTab('portfolio')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition"><i class="fa-solid fa-diagram-project"></i> Portfolio Manager</button>
+                        <button onclick="switchAdminTab('files')" class="admin-nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition"><i class="fa-solid fa-folder-open"></i> File Manager & Uploader</button>
+                    </nav>
+                </div>
+                <div class="p-6 border-t border-white/10">
+                    <button onclick="logoutAdmin()" class="w-full py-2.5 rounded-xl glass text-red-400 text-xs font-bold flex items-center justify-center gap-2 hover:bg-red-500/10 transition">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </aside>
+            <div class="flex-1 flex flex-col h-screen overflow-hidden">
+                <header class="h-20 glass border-b border-white/10 px-8 flex items-center justify-between shrink-0">
+                    <h3 id="admin-page-title" class="text-lg font-bold text-white">Analytics Dashboard</h3>
+                    <button onclick="logoutAdmin()" class="md:hidden px-3 py-1.5 rounded-lg bg-red-500/20 text-red-400 text-xs font-bold">Logout</button>
+                </header>
+                <div class="flex-1 overflow-y-auto p-8 space-y-8">
+                    <!-- Analytics Tab -->
+                    <div id="admin-tab-analytics" class="admin-tab space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Total Visitors</p><h5 class="text-3xl font-black text-electricBlue">1,240</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Active Projects</p><h5 class="text-3xl font-black text-neonPurple">8</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Monthly Revenue</p><h5 class="text-3xl font-black text-green-400">$32,400</h5></div>
+                            <div class="glass-card p-6 rounded-2xl"><p class="text-xs text-gray-400 uppercase mb-2">Pending Payments</p><h5 class="text-3xl font-black text-yellow-400">$2,100</h5></div>
+                        </div>
+                    </div>
+                    <!-- Portfolio Manager Tab -->
+                    <div id="admin-tab-portfolio" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl max-w-xl">
+                            <h5 class="text-lg font-bold text-white mb-4">Publish Portfolio Project</h5>
+                            <form onsubmit="handlePublishPortfolio(event)" class="space-y-4">
+                                <input type="text" id="pf-title" placeholder="Project Title" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <input type="text" id="pf-client" placeholder="Client Name" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs">
+                                <textarea id="pf-desc" placeholder="Project Description" rows="3" required class="w-full bg-dark/60 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs"></textarea>
+                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase hover:opacity-90">Publish Project</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- File Manager Tab (Shares uploads with visitor portal) -->
+                    <div id="admin-tab-files" class="admin-tab space-y-6 hidden">
+                        <div class="glass-card p-8 rounded-3xl space-y-6">
+                            <h5 class="text-lg font-bold text-white">Upload Files / Images for Public Visitors</h5>
+                            <div class="border-2 border-dashed border-white/20 rounded-2xl p-8 text-center relative hover:border-electricBlue transition">
+                                <input type="file" id="file-uploader" onchange="handleAdminFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                                <i class="fa-solid fa-cloud-arrow-up text-4xl text-electricBlue mb-3"></i>
+                                <h6 class="font-bold text-white text-sm">Click or Drag & Drop to Upload Images, PDFs, Videos, Docs</h6>
+                                <p class="text-xs text-gray-400 mt-1">Uploaded files instantly appear in the Visitor Downloads section on the main page.</p>
+                            </div>
+                            <div id="admin-uploaded-files-list" class="space-y-3">
+                                <!-- Uploaded files listing with delete option -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot UI -->
+    <div id="chatbot-container" class="fixed bottom-24 right-6 z-50 w-80 sm:w-96 glass-card rounded-3xl shadow-2xl border border-white/10 hidden flex flex-col overflow-hidden">
+        <div class="p-4 bg-dark/80 border-b border-white/10 flex items-center justify-between">
+            <h6 class="font-bold text-xs text-white">Northeast Digital Bot</h6>
+            <button onclick="closeChatbot()" aria-label="Close chatbot" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="chatbot-messages" class="p-4 h-64 overflow-y-auto space-y-3 text-xs text-gray-300 flex flex-col">
+            <div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">Hello! How can Northeast Digital assist your business growth today?</div>
+        </div>
+        <div class="p-3 border-t border-white/10 bg-dark/80 flex items-center gap-2">
+            <input type="text" id="chatbot-input" onkeypress="if(event.key==='Enter') sendChatMessage()" placeholder="Type a message..." class="w-full bg-dark/60 border border-white/10 rounded-xl px-3 py-2 text-white text-xs focus:outline-none">
+            <button onclick="sendChatMessage()" aria-label="Send message" class="w-9 h-9 rounded-xl bg-electricBlue text-black flex items-center justify-center shrink-0"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Background Neural Canvas
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+
+        const particles = Array.from({ length: 30 }, () => ({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, radius: Math.random() * 1.5 + 1 }));
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 240, 255, 0.12)';
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.04)';
+            particles.forEach((p, index) => {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > width) p.vx *= -1;
+                if (p.y < 0 || p.y > height) p.vy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    if (Math.hypot(p.x - p2.x, p.y - p2.y) < 110) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        function openLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('hidden-modal');
+            modal.classList.add('show-modal');
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('show-modal');
+            modal.classList.add('hidden-modal');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('login-user').value.trim();
+            const p = document.getElementById('login-pass').value.trim();
+
+            if (u === 'northeastdigital' && p === 'Northeast@6001') {
+                closeLoginModal();
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                renderAdminFilesList();
+            } else {
+                alert('Invalid credentials! Please use username: northeastdigital and password: Northeast@6001');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('text-electricBlue', 'bg-white/5'));
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            event.currentTarget.classList.add('text-electricBlue', 'bg-white/5');
+            const titles = { analytics: 'Analytics Dashboard', portfolio: 'Portfolio Manager', files: 'File Manager & Uploader' };
+            document.getElementById('admin-page-title').innerText = titles[tabName] || 'Admin Dashboard';
+            if(tabName === 'files') renderAdminFilesList();
+        }
+
+        function handlePublishPortfolio(e) {
+            e.preventDefault();
+            const projects = JSON.parse(localStorage.getItem('nd_published_portfolio') || '[]');
+            projects.push({ title: document.getElementById('pf-title').value, client: document.getElementById('pf-client').value, desc: document.getElementById('pf-desc').value });
+            localStorage.setItem('nd_published_portfolio', JSON.stringify(projects));
+            alert('Project published successfully!');
+            e.target.reset();
+            renderPublicPortfolio();
+        }
+
+        function renderPublicPortfolio() {
+            const projects = JSON.parse(localStorage.getItem('nd_published_portfolio') || '[]');
+            const container = document.getElementById('public-portfolio-container');
+            if(!container) return;
+            if(projects.length === 0) {
+                container.innerHTML = `<i class="fa-solid fa-rocket text-4xl text-electricBlue mb-4"></i><h4 class="text-lg font-bold text-white">No published portfolio projects at the moment.</h4><p class="text-xs text-gray-400 mt-2">Projects published by Shibam Ghosh from the Admin Dashboard will appear here immediately.</p>`;
+                return;
+            }
+            container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left" id="portfolio-grid"></div>`;
+            const grid = document.getElementById('portfolio-grid');
+            projects.forEach(p => {
+                grid.innerHTML += `<div class="glass-card p-6 rounded-2xl"><h5 class="font-bold text-white text-base mb-1">${p.title}</h5><p class="text-xs text-electricBlue mb-3">Client: ${p.client}</p><p class="text-xs text-gray-300">${p.desc}</p></div>`;
+            });
+        }
+
+        // Handle Admin File Uploads & Visitor Portal Display
+        function handleAdminFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(uploadEvent) {
+                const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+                const newFile = {
+                    id: Date.now(),
+                    name: file.name,
+                    type: file.type.startsWith('image/') ? 'image' : 'file',
+                    dataUrl: uploadEvent.target.result,
+                    size: (file.size / (1024*1024)).toFixed(1) + ' MB'
+                };
+                files.push(newFile);
+                localStorage.setItem('nd_visitor_files', JSON.stringify(files));
+                renderAdminFilesList();
+                renderVisitorFiles();
+                alert('File uploaded successfully and made available to visitors!');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderAdminFilesList() {
+            const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            const listContainer = document.getElementById('admin-uploaded-files-list');
+            if (!listContainer) return;
+            if (files.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">No files uploaded yet.</p>`;
+                return;
+            }
+            listContainer.innerHTML = '';
+            files.forEach(f => {
+                listContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/10">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid ${f.type === 'image' ? 'fa-image text-neonCyan' : 'fa-file-pdf text-electricBlue'} text-lg"></i>
+                            <div><h6 class="font-bold text-white text-xs">${f.name}</h6><span class="text-[10px] text-gray-400">${f.size}</span></div>
+                        </div>
+                        <button onclick="deleteVisitorFile(${f.id})" class="text-red-400 hover:text-red-300 text-xs px-3 py-1"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteVisitorFile(id) {
+            let files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            files = files.filter(f => f.id !== id);
+            localStorage.setItem('nd_visitor_files', JSON.stringify(files));
+            renderAdminFilesList();
+            renderVisitorFiles();
+        }
+
+        function renderVisitorFiles() {
+            const files = JSON.parse(localStorage.getItem('nd_visitor_files') || '[]');
+            const grid = document.getElementById('visitor-files-grid');
+            if (!grid) return;
+            if (files.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 glass-card p-8 rounded-3xl text-center"><p class="text-xs text-gray-400">No public files shared by the agency yet.</p></div>`;
+                return;
+            }
+            grid.innerHTML = '';
+            files.forEach(f => {
+                if (f.type === 'image') {
+                    grid.innerHTML += `
+                        <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10">
+                            <img src="${f.dataUrl}" alt="${f.name}" class="w-full h-48 object-cover">
+                            <div class="p-4 flex items-center justify-between">
+                                <span class="text-xs font-bold text-white truncate">${f.name}</span>
+                                <a href="${f.dataUrl}" download="${f.name}" class="px-3 py-1.5 rounded-lg bg-electricBlue text-black font-bold text-[10px] uppercase">Download</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    grid.innerHTML += `
+                        <div class="glass-card p-6 rounded-2xl flex flex-col justify-between border border-white/10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fa-solid fa-file-lines text-3xl text-electricBlue"></i>
+                                <div><h5 class="font-bold text-white text-sm truncate">${f.name}</h5><span class="text-[10px] text-gray-400">${f.size}</span></div>
+                            </div>
+                            <a href="${f.dataUrl}" download="${f.name}" class="w-full py-2.5 rounded-xl bg-electricBlue text-black font-bold text-xs uppercase text-center block">Download File</a>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function openChatbot() { document.getElementById('chatbot-container').classList.toggle('hidden'); }
+        function closeChatbot() { document.getElementById('chatbot-container').classList.add('hidden'); }
+        function sendChatMessage() {
+            const input = document.getElementById('chatbot-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+            const messages = document.getElementById('chatbot-messages');
+            messages.innerHTML += `<div class="bg-electricBlue text-black p-3 rounded-2xl max-w-[85%] self-end font-medium">${msg}</div>`;
+            input.value = '';
+            setTimeout(() => {
+                messages.innerHTML += `<div class="bg-white/5 p-3 rounded-2xl max-w-[85%] self-start border border-white/10">Thank you for your message! Shibam Ghosh and our team at Northeast Digital will connect with you soon. You can also reach us via WhatsApp at +91 60016 14427.</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 500);
+        }
+
+        window.addEventListener('load', () => {
+            renderPublicPortfolio();
+            renderVisitorFiles();
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    </script>
+</body>
+</html>
